@@ -1,0 +1,53 @@
+﻿@model IEnumerable<KAssets.Areas.Admin.Models.SecurityGroupViewModel>
+
+@{
+    ViewBag.Title = "Security groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Admin.SecGroups</h2>
+<p style="color:red; font-size:25px">
+    @TempData["DelError"]
+</p>
+
+<table class="table">
+
+    <tr>
+        <td><a href="/Admin/SecurityGroup/Add" class="btn btn-primary">@Admin.AddSecGroup</a></td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Admin/SecurityGroup/Details/@item.Id"><h4>@item.Name</h4></a>
+            </td>
+            @if (item.Name != KAssets.Resources.BaseAdmin.BaseGroup)
+            {
+                <td>
+                    <div class="row">
+                        <div class="col-md-2 col-xs-4" >
+                            <a  class="btn btn-primary float-right" href="/Admin/SecurityGroup/Edit/@item.Id">@Common.Edit</a>
+                        </div>
+
+                        <div class="col-md-3 col-xs-8">
+                            @using (Html.BeginForm("Remove", "SecurityGroup", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <div>
+                                    <input type="submit" class="btn btn-danger" value="@Common.Delete" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutMe" xml:space="preserve">
+    <value>За мен</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добави</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Назад </value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="ComparePassError" xml:space="preserve">
+    <value>Паролите не съвпадат.</value>
+  </data>
+  <data name="ConfirmPass" xml:space="preserve">
+    <value>Потвърди паролата</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Създай</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Изтрий</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Детайли</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактиране</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Имейл</value>
+  </data>
+  <data name="EmailIsRequired" xml:space="preserve">
+    <value>Полето "Имейл" е задължително.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Първо име</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Здравейте</value>
+  </data>
+  <data name="HTMLNotAllowed" xml:space="preserve">
+    <value>HTML не е позволен</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Локация</value>
+  </data>
+  <data name="LogОff" xml:space="preserve">
+    <value>Излез</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Име</value>
+  </data>
+  <data name="NotCorrectEmail" xml:space="preserve">
+    <value>Полето "Имейл" не е валидно.</value>
+  </data>
+  <data name="Organisation" xml:space="preserve">
+    <value>Организация</value>
+  </data>
+  <data name="PassRequired" xml:space="preserve">
+    <value>Полето "Парола" е задължително.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Парола</value>
+  </data>
+  <data name="Rights" xml:space="preserve">
+    <value>Права</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="SecondName" xml:space="preserve">
+    <value>Бащино име</value>
+  </data>
+  <data name="ShoudBeAtLeast" xml:space="preserve">
+    <value>{0} трябва да бъде поне {2} символа.</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Сайт</value>
+  </data>
+  <data name="Skype" xml:space="preserve">
+    <value>Скайп</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Потребители</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>И</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Отговор</value>
+  </data>
+  <data name="Asset" xml:space="preserve">
+    <value>Актив</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Избери</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Валута</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Съобщение</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>Няма резултет !</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>Или</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Виж</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Брой</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Артикули</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Принтирай</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Доставчик</value>
+  </data>
+  <data name="ProviderOrder" xml:space="preserve">
+    <value>Поръчка към доставчик</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Търсене</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Общо</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Потребител</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Изпрати</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Изчисти</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Ид</value>
+  </data>
+  <data name="Scrap" xml:space="preserve">
+    <value>Бракувай</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>Виж всички</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Одобри</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Откажи</value>
+  </data>
+  <data name="Receive" xml:space="preserve">
+    <value>Получи</value>
+  </data>
+  <data name="PackingSlip" xml:space="preserve">
+    <value>Приемно-предавателен протокол</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Премахни</value>
+  </data>
+  <data name="Accidents" xml:space="preserve">
+    <value>Инциденти</value>
+  </data>
+  <data name="AccidentsByDate" xml:space="preserve">
+    <value>Инциденти по дата</value>
+  </data>
+  <data name="AllHistory" xml:space="preserve">
+    <value>Цялата история</value>
+  </data>
+  <data name="AllRequestsForIssue" xml:space="preserve">
+    <value>Всички заявки за издаване</value>
+  </data>
+  <data name="AllRequestsForReceive" xml:space="preserve">
+    <value>Всички заявки за получване</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Отговорени</value>
+  </data>
+  <data name="ApprovedRequrests" xml:space="preserve">
+    <value>Одобрени заявки</value>
+  </data>
+  <data name="AssetOrder" xml:space="preserve">
+    <value>Поръчка на актив</value>
+  </data>
+  <data name="AssetsByStatus" xml:space="preserve">
+    <value>Активи по статус</value>
+  </data>
+  <data name="AssetsForRenovating" xml:space="preserve">
+    <value>Активи за ремонт</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Събития</value>
+  </data>
+  <data name="ForAnswering" xml:space="preserve">
+    <value>За отоговаряне</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="Inbox" xml:space="preserve">
+    <value>Кутия</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>Фактури</value>
+  </data>
+  <data name="InvoicesByDate" xml:space="preserve">
+    <value>Фактури по дата</value>
+  </data>
+  <data name="InvoicesForApproving" xml:space="preserve">
+    <value>Фактури за одобрение</value>
+  </data>
+  <data name="InvoicesForPaid" xml:space="preserve">
+    <value>Фактури за плащане</value>
+  </data>
+  <data name="ItemOrder" xml:space="preserve">
+    <value>Поръчка на артикул</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Поръчки</value>
+  </data>
+  <data name="ProviderOrderO" xml:space="preserve">
+    <value>Поръчка от доставчик</value>
+  </data>
+  <data name="Relocation" xml:space="preserve">
+    <value>Преместване</value>
+  </data>
+  <data name="RelocationsForAsset" xml:space="preserve">
+    <value>Премествания на актив</value>
+  </data>
+  <data name="RenovatedAssetsByDate" xml:space="preserve">
+    <value>Ремонтирани активи по дата</value>
+  </data>
+  <data name="Renovation" xml:space="preserve">
+    <value>Ремонтиране</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Справки</value>
+  </data>
+  <data name="RequestsForApproving" xml:space="preserve">
+    <value>Заявки за одобрение</value>
+  </data>
+  <data name="RequestsForFinishing" xml:space="preserve">
+    <value>Заявки за завършване</value>
+  </data>
+  <data name="ReturnedAssets" xml:space="preserve">
+    <value>Върнати активи</value>
+  </data>
+  <data name="Scrapping" xml:space="preserve">
+    <value>Бракуване</value>
+  </data>
+  <data name="SecurityGroups" xml:space="preserve">
+    <value>Групи за сигурност</value>
+  </data>
+  <data name="SendRequest" xml:space="preserve">
+    <value>Изпрати заявка</value>
+  </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>Виж всички</value>
+  </data>
+  <data name="YourHistory" xml:space="preserve">
+    <value>Вашата история</value>
+  </data>
+  <data name="YourRequestsForIssue" xml:space="preserve">
+    <value>Вашите заявки за издаване</value>
+  </data>
+  <data name="YourRequestsForReceive" xml:space="preserve">
+    <value>Вашите заявки за получаване</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Резултат</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>До</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Съдържание</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Грешка</value>
+  </data>
+</root>

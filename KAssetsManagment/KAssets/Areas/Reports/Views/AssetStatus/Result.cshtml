@@ -1,0 +1,86 @@
+﻿@model IEnumerable<KAssets.Areas.AssetsActions.Models.AssetViewModel>
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Reports.Result</h2>
+
+
+
+<style>
+    .display-inline {
+        display: inline;
+    }
+
+    .width-170px {
+        width: 170px;
+    }
+
+    .text-h-center {
+        vertical-align: central;
+    }
+</style>
+
+<br />
+<div class="row">
+    <div class="col-md-1 text-h-center">
+        <h5>@Common.Search</h5>
+    </div>
+    <select class="form-control display-inline width-170px" id="searchBy">
+        <option value="Inventory number">
+            @Html.DisplayNameFor(model => model.InventoryNumber)
+        </option>
+        <option value="Brand">
+            @Html.DisplayNameFor(model => model.Brand)
+        </option>
+        <option value="Model">
+            @Html.DisplayNameFor(model => model.AssetModel)
+        </option>
+        <option value="Side name">
+            @Html.DisplayNameFor(model => model.SiteName)
+        </option>
+    </select>
+    <input type="text" class="form-control display-inline" id="searchValue" />
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SiteName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="inventoryNumber">
+                <a href="/Reports/AssetStatus/Details/@item.InventoryNumber">@Html.DisplayFor(modelItem => item.InventoryNumber)</a>
+            </td>
+            <td class="brand">
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td class="model">
+                @Html.DisplayFor(modelItem => item.AssetModel)
+            </td>
+            <td class="siteName">
+                @Html.DisplayFor(modelItem => item.SiteName)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts
+{
+    <script src="~/Areas/Reports/Scripts/AssetStatusReportCreateJS.js"></script>
+}

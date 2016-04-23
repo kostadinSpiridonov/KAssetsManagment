@@ -1,0 +1,22 @@
+﻿.display-inline {
+    display: inline;
+}
+
+.width-170px {
+    width: 170px;
+}
+
+.text-h-center {
+    vertical-align: central;
+}
+
+.width-250px {
+    width: 250px;
+}
+
+.tableOuter {
+    overflow-y: auto;
+    max-height: 350px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #cccccc;
+}

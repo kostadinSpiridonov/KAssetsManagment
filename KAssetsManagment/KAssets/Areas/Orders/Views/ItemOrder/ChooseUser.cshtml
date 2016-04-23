@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KAssets.Models.ShowUserViewModel>
+
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchByUser">
+            <option value="Name">
+                @Html.DisplayNameFor(model => model.First().Name)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline width-250px" id="searchValueUser" />
+    </div>
+</div>
+<br />
+<div class="tableOuter">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="name">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+
+                    <button class="btn btn-default user" id="@item.Id">@Common.Choose</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

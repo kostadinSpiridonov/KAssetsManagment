@@ -1,0 +1,83 @@
+﻿@model IEnumerable<KAssets.Models.AssetEventViewModel>
+
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .unseen {
+        background-color: #c8e6fc;
+        margin: 2px;
+        border-radius: 5px;
+        border: 1px solid #a2d8ff;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+    .clickable:hover {
+        background-color:#cccccc;
+    }
+</style>
+
+<h2>@Common.Events</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.IsSeen)
+        {
+            <tr class="clickable" relocate="@item.RelocationUrl">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr class="unseen clickable" relocate="@item.RelocationUrl">
+                <td>
+                    <i class="fa fa-flag-o"></i>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+@if (Model.Count() == 0)
+{
+    <h4>No events !</h4>
+}
+@section Scripts
+{
+    <script>
+        //Click to event go to page (simulate <a>)
+        $(".clickable").click(function () {
+            if ($(this).attr("relocate") != undefined) {
+                window.location.href = $(this).attr("relocate");
+            }
+            else
+            {
+                window.location.href="/Home"
+            }
+        });
+    </script>
+}

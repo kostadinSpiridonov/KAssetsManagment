@@ -1,0 +1,134 @@
+﻿@model KAssets.Areas.Items.Models.AddItemViewModel
+
+@{
+    ViewBag.Title = "Add a new item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ItemTr.AddNewItem</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control " } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfManufacture, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfManufacture, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                @Html.ValidationMessageFor(model => model.DateOfManufacture, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Producer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Producer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Producer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ItemModel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ItemModel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ItemModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RotatingItem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.RotatingItem)
+                    @Html.ValidationMessageFor(model => model.RotatingItem, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SeletedOrganisationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SeletedOrganisationId, Model.Organisations.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name })
+                  , ItemTr.SelectOrganisation, new { @class = "form-control", @id = "selectOrganisation" })
+                @Html.ValidationMessageFor(model => model.SeletedOrganisationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedCurrency, Model.Currency.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Code })
+
+           , new { @class = "form-control", @id = "selectCurrency" })
+
+                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="@Common.Save" class="btn btn-default" />
+            </div>
+            <div class="col-md-9">
+                <a class="btn btn-default" href="/Items/Item/GetAll">@Common.Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts
+{
+<script src="~/Areas/Items/Scripts/Item/CreateDateJS.js"></script>
+    <script>
+        $("#selectOrganisation").change(function () {
+            var id = $(this).val();
+            $.get("/Items/Item/OrganisationCurrencies/" + id).done(function (data) {
+                var mySelect = $('#selectCurrency');
+                mySelect.find("*").remove();
+                $.each(data, function (i) {
+                    mySelect.append(
+                        $('<option></option>').val(data[i].Id).html(data[i].Code)
+                    );
+                });
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,103 @@
+﻿@model List<KAssets.Areas.Orders.Models.AddAssetViewModel>
+@{
+    ViewBag.Title = "CreateAssets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ItemOrderTr.CreateAssets</h2>
+
+
+@using (Html.BeginForm("CreateAssetsFromItemOrder", "Asset", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-horizontal">
+            <div class="row">
+                <hr />
+                <h4>@ItemOrderTr.ItemDetails</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Item.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => Model[i].Item.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Item.ItemModel, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => Model[i].Item.ItemModel, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Item.Producer, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => Model[i].Item.Producer, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Item.DateOfManufacture, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => Model[i].Item.DateOfManufacture, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Item.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => Model[i].Item.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @(" " + Model[i].Item.Currency)
+                    </div>
+                </div>
+                @Html.HiddenFor(x => Model[i].Item.Brand)
+                @Html.HiddenFor(x => Model[i].Item.ItemModel)
+                @Html.HiddenFor(x => Model[i].Item.Producer)
+                @Html.HiddenFor(x => Model[i].Item.DateOfManufacture)
+                @Html.HiddenFor(x => Model[i].Item.Price)
+
+            </div>
+            <div class="row">
+                <h4>@ItemOrderTr.BaseDetails</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => Model[i].ItemId)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].InventoryNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => Model[i].InventoryNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => Model[i].InventoryNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => Model[i].Type,
+                new SelectList(
+               Enum.GetNames(typeof(KAssets.Models.TypesOfAsset)).ToList()
+                ), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => Model[i].Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model[i].Guarantee, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => Model[i].Guarantee, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => Model[i].Guarantee, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.HiddenFor(x => Model[i].RequestId);
+            </div>
+
+
+        </div>
+
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Common.Create" class="btn btn-default" />
+        </div>
+    </div>
+}

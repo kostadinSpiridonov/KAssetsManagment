@@ -1,0 +1,43 @@
+﻿@model KAssets.Areas.HelpModule.Models.AddAccidentViewModel
+
+@{
+    ViewBag.Title = "Create accident";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .messageBox{
+        min-width:500px  !important;
+        max-width:500px !important;
+        height:200px !important;
+    }
+</style>
+
+<h2>@AccidentTr.CreateNewAccident</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Message, new { @class = "form-control messageBox" } )
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="@Common.Send" class="btn btn-default" />
+            </div>
+            <div class="col-md-9">
+                <a href="/Home/Index" class="btn btn-default" >@Common.Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+

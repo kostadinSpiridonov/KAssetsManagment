@@ -1,0 +1,85 @@
+﻿@model KAssets.Areas.AssetsActions.Models.CreateRenovationRequestViewModel
+@{
+    ViewBag.Title = "Send request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/styles.css" rel="stylesheet" />
+
+<h2>@RenovationTr.CreateRenovationRequest</h2>
+
+<div id="assets" class="hidden " title="@RenovationTr.ChooseAsset">
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.SelectedAsset, new { @class = "col-md-12 control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.SelectedAsset, new { @class = "form-control", readOnly = "readOnly" })
+                    @Html.ValidationMessageFor(m => m.SelectedAsset, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.ActionLink(Common.Choose, "ChooseAsset", null, new { @class = "chooseAsset btn btn-default" })
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.ProblemMesssage, new { @class = "col-md-12 control-label" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.ProblemMesssage, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ProblemMesssage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+
+            <div class="form-group">
+                <div class="inline-block col-md-offset-4 margin-r-5">
+                    <input type="submit" value="@Common.Send" class="btn btn-primary" />
+                </div>
+                <div class="inline-block">
+                    <a href="/Home/Index" class="btn btn-default">@Common.Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-6" id="assetDetails">
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+
+            //Check if is there selected asset
+            if ("@Model" != "") {
+
+                if ($("#SelectedAsset").val()) {
+                    var id = $("#SelectedAsset").val().toString();
+
+                    $("#assetDetails").html(' <img src="/Content/31.gif" alt="Loading..." />');
+
+                    $.get("/AssetsActions/Asset/DetailsPartial/" + id).done(function (data) {
+                        $("#assetDetails").html(data);
+                    });
+                }
+            }
+        });
+
+    </script>
+<script src="~/Areas/AssetsActions/Scripts/Renovation/CreateRequestJS.js"></script>
+}

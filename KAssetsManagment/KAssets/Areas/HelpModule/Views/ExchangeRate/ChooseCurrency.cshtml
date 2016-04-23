@@ -1,0 +1,56 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.CurrencyViewModel>
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchBy">
+            <option value="Id">
+                @Html.DisplayNameFor(model => model.First().Id)
+            </option>
+            <option value="Code">
+                @Html.DisplayNameFor(model => model.First().Code)
+            </option>
+            <option value="Description">
+                @Html.DisplayNameFor(model => model.First().Description)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline width-250px" id="searchValue" />
+    </div>
+</div>
+<br />
+<div class="tableOuter">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="id">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="code">
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td class="description">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <input type="button" value="@Common.Choose" class="currency btn btn-default" id="@item.Id" />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

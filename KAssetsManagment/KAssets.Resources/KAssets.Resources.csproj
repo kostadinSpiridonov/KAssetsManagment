@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C2E09FB-B0C4-481C-92F7-E9D716E70C41}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KAssets.Resources</RootNamespace>
+    <AssemblyName>KActive.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseAdmin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseAdmin.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Translation\AccidentTr\AccidentTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccidentTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AccidentTr\AccidentTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccidentTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AccountTr\AccountTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AccountTr\AccountTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AdminArea\Admin.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Admin.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AdminArea\Admin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Admin.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AdminArea\Rights.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rights.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AdminArea\Rights.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rights.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AssetsTr\AssetTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\AssetsTr\AssetTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\BillTr\BillTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\BillTr\BillTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\CurrencyTr\CurrencyTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\CurrencyTr\CurrencyTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\EventsTr\EventsTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\EventsTr\EventsTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ExchangeRateTr\ExchangeRateTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExchangeRateTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ExchangeRateTr\ExchangeRateTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExchangeRateTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\HomeTr\HomeTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\InvoiceTr\InvoiceTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\InvoiceTr\InvoiceTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ItemTr\ItemTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ItemTr\ItemTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\LocationsTr\LocationTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocationTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\LocationsTr\LocationTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocationTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrdersTr\AssetOrderTr\AssetOrderTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetOrderTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrdersTr\AssetOrderTr\AssetOrderTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetOrderTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrdersTr\ItemOrderTr\ItemOrderTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemOrderTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrdersTr\ItemOrderTr\ItemOrderTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemOrderTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrdersTr\ProviderOrder\ProviderOrderTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderOrderTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrdersTr\ProviderOrder\ProviderOrderTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderOrderTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrganisationTr\OrganisationTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganisationTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\OrganisationTr\OrganisationTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganisationTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\PackingSlipTr\PackingSlipTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PackingSlipTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\PackingSlipTr\PackingSlipTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PackingSlipTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ProviderTr\ProviderTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ProviderTr\ProviderTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\RelocationTr\RelocationTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RelocationTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\RelocationTr\RelocationTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RelocationTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\RenovationTr\RenovationTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenovationTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\RenovationTr\RenovationTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenovationTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ReportsArea\Reports.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reports.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ReportsArea\Reports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reports.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ScrappingTr\ScrappingTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrappingTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\ScrappingTr\ScrappingTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrappingTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\SiteTr\SiteTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\SiteTr\SiteTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteTr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\UserSiteTr\UserSiteTr.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserSiteTr.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation\UserSiteTr\UserSiteTr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserSiteTr.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BaseAdmin.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseAdmin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AccidentTr\AccidentTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccidentTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AccidentTr\AccidentTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccidentTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AccountTr\AccountTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AccountTr\AccountTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AdminArea\Admin.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Admin.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AdminArea\Admin.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Admin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AdminArea\Rights.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Rights.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AdminArea\Rights.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Rights.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AssetsTr\AssetTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\AssetsTr\AssetTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\BillTr\BillTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BillTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\BillTr\BillTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BillTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\Common.bg.resx" />
+    <EmbeddedResource Include="Translation\Common.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\CurrencyTr\CurrencyTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrencyTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\CurrencyTr\CurrencyTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrencyTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\EventsTr\EventsTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventsTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\EventsTr\EventsTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventsTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ExchangeRateTr\ExchangeRateTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExchangeRateTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ExchangeRateTr\ExchangeRateTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExchangeRateTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\HomeTr\HomeTr.bg.resx" />
+    <EmbeddedResource Include="Translation\HomeTr\HomeTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\InvoiceTr\InvoiceTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InvoiceTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\InvoiceTr\InvoiceTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InvoiceTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ItemTr\ItemTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ItemTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ItemTr\ItemTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ItemTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\LocationsTr\LocationTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocationTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\LocationsTr\LocationTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocationTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrdersTr\AssetOrderTr\AssetOrderTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetOrderTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrdersTr\AssetOrderTr\AssetOrderTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetOrderTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrdersTr\ItemOrderTr\ItemOrderTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ItemOrderTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrdersTr\ItemOrderTr\ItemOrderTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ItemOrderTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrdersTr\ProviderOrder\ProviderOrderTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProviderOrderTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrdersTr\ProviderOrder\ProviderOrderTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProviderOrderTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrganisationTr\OrganisationTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrganisationTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\OrganisationTr\OrganisationTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrganisationTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\PackingSlipTr\PackingSlipTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PackingSlipTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\PackingSlipTr\PackingSlipTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PackingSlipTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ProviderTr\ProviderTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProviderTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ProviderTr\ProviderTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProviderTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\RelocationTr\RelocationTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RelocationTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\RelocationTr\RelocationTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RelocationTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\RenovationTr\RenovationTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RenovationTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\RenovationTr\RenovationTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RenovationTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ReportsArea\Reports.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reports.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ReportsArea\Reports.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reports.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ScrappingTr\ScrappingTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScrappingTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\ScrappingTr\ScrappingTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScrappingTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\SiteTr\SiteTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\SiteTr\SiteTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\UserSiteTr\UserSiteTr.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserSiteTr.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translation\UserSiteTr\UserSiteTr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserSiteTr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

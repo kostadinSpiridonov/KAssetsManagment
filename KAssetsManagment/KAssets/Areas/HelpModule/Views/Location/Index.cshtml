@@ -1,0 +1,50 @@
+﻿@model List<KAssets.Areas.HelpModule.Models.ShowLocationViewModel>
+
+@{
+    ViewBag.Title = "Locations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+
+<h2>@LocationTr.Locations</h2>
+@Html.ActionLink(LocationTr.NewLocation, "Add", null, new { @class = "btn btn-primary" })
+
+<p style="color:red;margin-top:10px">@TempData["DelError"]</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Code)
+        </th>
+        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.First().Organisation)
+            </th>
+        }
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+            {
+                <td>
+                    @Html.DisplayFor(model =>item.Organisation)
+                </td>
+            }
+            <td>
+                @Html.ActionLink(Common.Edit, "Edit", new { id = item.Code }, new { @class = "btn btn-primary" })
+                @Html.ActionLink(Common.Details, "Details", new { id = item.Code }, new { @class = "btn btn-default" })
+                @Html.ActionLink(Common.Delete, "Delete", new { id = item.Code }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
+@if (Model.Count == 0)
+{
+    <h4>@LocationTr.NoLocations</h4>
+}

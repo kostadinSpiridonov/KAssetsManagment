@@ -1,0 +1,69 @@
+﻿@model IEnumerable<KAssets.Models.EmailViewModel>
+
+@{
+    ViewBag.Title = "Provider answers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@ProviderOrderTr.ProviderAnswers</h2>
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfSend)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        <tr class="email" id="@item.UId">
+            @if (!item.Seen)
+            {
+                <td style="font-weight: 600; color:deepskyblue">
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfSend)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<style>
+    .email:hover{
+        background-color:#dedede;
+        cursor:pointer;
+    }
+</style>
+@section Scripts
+{
+    <script>
+        //Ovverride <a>
+        $(".email").click(function () {
+            var id = $(this).attr("id");
+            window.location.href = "/Orders/ProviderOrder/ViewProviderAnswer/" + id;
+        });
+    </script>
+}

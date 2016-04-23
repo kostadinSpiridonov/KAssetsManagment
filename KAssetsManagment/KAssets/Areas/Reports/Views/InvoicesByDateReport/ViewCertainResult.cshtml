@@ -1,0 +1,285 @@
+﻿@model KAssets.Areas.Invoices.Models.InvoiceFullViewModel
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CssKAssets/PrintInvoiceCss.css" rel="stylesheet" />
+<style>
+    .font-weight-bold {
+        font-weight: bold;
+    }
+</style>
+
+<button class="btn btn-default frmPrint" id="print">@Common.Print</button>
+<h2>@InvoiceTr.HistoryInvoice</h2>
+<br />
+<div class="col-md-12 printCell">
+    <h4>@InvoiceTr.InvoiceNumber</h4>
+    <br />
+    <div>
+        <div class="col-md-3">
+            @Html.Label("Number", new { @class = "control-label" })
+            <br />
+        </div>
+        <div class="col-md-5">
+            @Html.DisplayFor(x => x.Number, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 printCell">
+    <hr />
+    <h4>@InvoiceTr.Dates </h4>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(x=>x.DateOfIssue, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.DisplayFor(x => x.DateOfIssue, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br />
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PaymentPeriod, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.PaymentPeriod, new { htmlAttributes = new { @class = "form-control date-picker" } })
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br />
+    </div>
+    <div class="form-group">        
+        @Html.LabelFor(x => x.DateOfApproving, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @if (Model.DateOfApproving.Contains("1.1.0001"))
+            {
+                @InvoiceTr.NotApproved
+            }
+            else
+            {
+                @Html.DisplayFor(x => x.DateOfApproving, new { @class = "form-control" })
+            }
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br />
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.DayOfPayment, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @if (Model.DayOfPayment.Contains("1.1.0001"))
+            {
+                @InvoiceTr.NotPayed
+            }
+            else
+            {
+                @Html.DisplayFor(x => x.DayOfPayment, new { @class = "form-control" })
+            }
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 printCell ">
+    <hr />
+</div>
+<div class="col-md-12 printCell">
+    <h4>@InvoiceTr.CompiledUser</h4>
+    <br />
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompiledUser, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.CompiledUser, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col-md-12">
+    <hr />
+</div>
+<div class="col-md-12 printCell">
+    <h4>@InvoiceTr.RemitTo</h4>
+    <br />
+    <div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 font-weight-bold">
+                    @Common.Name:
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(x => x.ProviderName, null, new { htmlAttributes = new { @id = "ProviderName", @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-md-3 font-weight-bold">
+                    @Common.Email:
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(x => x.ProviderEmail, new { htmlAttributes = new { @id = "ProviderEmail", @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-md-3 font-weight-bold">
+                    @Common.Address:
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(x => x.ProviderAddress, null, new { htmlAttributes = new { @id = "ProviderIBAN", @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-md-3 font-weight-bold">
+                    @InvoiceTr.Bulstat:
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(x => x.ProviderBulstat, null, new { htmlAttributes = new { @id = "ProviderIBAN", @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br />
+        <br />
+    </div>
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RecipientMOL, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.RecipientMOL, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <br />
+        </div>
+    </div>
+</div>
+<div class="col-md-12 printCell">
+    <br />
+    <hr />
+</div>
+<div class="col-md-12 printCell">
+    <h4>@InvoiceTr.BillTo</h4>
+    <br />
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillToOrganisation, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.BillToOrganisation, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <br />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillToSite, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.BillToSite, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <br />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillToAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.BillToAddress, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <hr />
+</div>
+@if (Model.POFrom != null)
+{
+    <div class="col-md-12 printCell">
+        <h4>@Common.ProviderOrder</h4>
+        <br />
+        <div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.POFrom, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.POFrom, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.POProvider, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.POProvider, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PODateOfSend, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PODateOfSend, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<div class="col-md-12">
+    <hr />
+</div>
+<div class="col-md-12 page-break">
+    <h4>@Common.Items</h4>
+    <br />
+    <div class="col-md-12">
+        <div class="row font-weight-bold">
+            <div class="col-md-3 printMark">@KAssets.Resources.Translation.AssetsTr.AssetTr.Brand</div>
+            <div class="col-md-3 printMark">@KAssets.Resources.Translation.AssetsTr.AssetTr.Model</div>
+            <div class="col-md-3 printMark">@Common.Count</div>
+            <div class="col-md-3 printMark">@KAssets.Resources.Translation.AssetsTr.AssetTr.Price</div>
+            <hr />
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-md-3 printMark">@item.Brand</div>
+                <div class="col-md-3 printMark">@item.Model</div>
+                <div class="col-md-3 printMark">@item.Quantity</div>
+                <div class="col-md-3 printMark">@item.Price @(" " + item.Currency)</div>
+                <div class="col-md-12">
+                    <br />
+                </div>
+            }
+        </div>
+
+        <div class="col-md-offset-8">
+            <hr />
+            <h4>
+                @Common.Total: @Model.Price
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <br />
+    <hr />
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/PrintPage.js"></script>
+}

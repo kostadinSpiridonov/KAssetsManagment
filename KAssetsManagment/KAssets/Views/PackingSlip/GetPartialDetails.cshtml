@@ -1,0 +1,60 @@
+﻿@model KAssets.Models.PackingSlipViewModel
+<style>
+    dd {
+        height: 1.6em; /* or whatever - but use ems :) */
+    }
+</style>
+<div>
+    <h4>@Common.PackingSlip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FromName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsGiven)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsGiven)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfGiven)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfGiven)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsReceived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsReceived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfReceived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfReceived)
+        </dd>
+
+    </dl>
+</div>

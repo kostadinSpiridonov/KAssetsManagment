@@ -1,0 +1,91 @@
+﻿@model KAssets.Areas.HelpModule.Models.AddExchangeRateViewModel
+
+@{
+    ViewBag.Title = "Add exchange rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+
+<style>
+    .inline {
+        display: inline;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/styles.css" rel="stylesheet" />
+
+<div id="currencyD" class="hidden " title="@ExchangeRateTr.ChooseCurrency">
+</div>
+
+<h2>@ExchangeRateTr.AddNewExchangeRate</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SeletedOrganisationId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SeletedOrganisationId, Model.Organisations.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name })
+                  , ItemTr.SelectOrganisation, new { @class = "form-control", @id = "selectOrganisation" })
+                    @Html.ValidationMessageFor(model => model.SeletedOrganisationId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control inline" id="fromCode" readonly="readonly" />
+                <input type="button" class="btn btn-default" id="chooseFrom" value="@Common.Choose" />
+                @Html.HiddenFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                <br />
+                <input type="button" class="btn btn-sm btn-danger" id="clearFrom" value="@Common.Clear" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control inline" id="toCode" readonly="readonly" />
+                <input type="button" class="btn btn-default" id="chooseTo" value="@Common.Choose" />
+                @Html.HiddenFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                <br />
+                <input type="button" class="btn btn-sm btn-danger" id="clearTo" value="@Common.Clear" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(x => x.SeletedOrganisationId, new { @id = "orgId" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="@Common.Create" class="btn btn-default" />
+            </div>
+            <div class="col-md-9">
+                <a href="/HelpModule/ExchangeRate/Index" class="btn btn-default">@Common.Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script src="~/Areas/HelpModule/Scripts/ExchangeRate/EditJS.js"></script>
+    <script src="~/Areas/HelpModule/Scripts/ExchangeRate/AddJS.js"></script>
+
+}

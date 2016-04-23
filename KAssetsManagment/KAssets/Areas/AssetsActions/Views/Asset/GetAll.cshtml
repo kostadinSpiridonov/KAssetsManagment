@@ -1,0 +1,126 @@
+﻿@model IEnumerable<KAssets.Areas.AssetsActions.Models.AssetViewModel>
+
+@{
+    ViewBag.Title = "Assets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .display-inline {
+        display: inline;
+    }
+
+    .width-170px {
+        width: 170px;
+    }
+
+    .text-h-center {
+        vertical-align: central;
+    }
+</style>
+
+<h2>@AssetTr.Assets</h2>
+
+<br />
+<div class="row">
+    <div class="col-md-1 text-h-center">
+        <h5>@Common.Search</h5>
+    </div>
+    <select class="form-control display-inline width-170px" id="searchBy">
+        <option value="Inventory number">
+            @Html.DisplayNameFor(model => model.InventoryNumber)
+        </option>
+        <option value="Brand">
+            @Html.DisplayNameFor(model => model.Brand)
+        </option>
+        <option value="Model">
+            @Html.DisplayNameFor(model => model.AssetModel)
+        </option>
+        <option value="Site name">
+            @Html.DisplayNameFor(model => model.SiteName)
+        </option>
+    </select>
+    <input type="text" class="form-control display-inline" id="searchValue" />
+</div>
+<br />
+<div>
+    <a class="btn btn-primary" href="/AssetsActions/Asset/Add">@AssetTr.AddNewAsset</a>
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SiteName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.IsInYourSite)
+        {
+            <tr>
+                <td class="inventoryNumber">
+                    <a href="/AssetsActions/Asset/Details/@item.InventoryNumber">@Html.DisplayFor(modelItem => item.InventoryNumber)</a>
+                </td>
+                <td class="brand">
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td class="model">
+                    @Html.DisplayFor(modelItem => item.AssetModel)
+                </td>
+                <td class="siteName">
+                    @Html.DisplayFor(modelItem => item.SiteName)
+                </td>
+                <td>
+                    <a class=" btn btn-primary" href="/AssetsActions/Asset/Edit/@item.InventoryNumber">@Common.Edit</a>
+                    <a class=" btn btn-danger" href="/AssetsActions/ScrappingAsset/SendRequestForScrapping/@item.InventoryNumber">@Common.Scrap</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr class="other hidden">
+                <td class="inventoryNumber">
+                    <a href="/AssetsActions/Asset/Details/@item.InventoryNumber">@Html.DisplayFor(modelItem => item.InventoryNumber)</a>
+                </td>
+                <td class="brand">
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td class="model">
+                    @Html.DisplayFor(modelItem => item.AssetModel)
+                </td>
+                <td class="siteName">
+                    @Html.DisplayFor(modelItem => item.SiteName)
+                </td>
+                <td>
+                    <a class=" btn btn-primary" href="/AssetsActions/Asset/Edit/@item.InventoryNumber">@Common.Edit</a>
+                    <a class=" btn btn-danger" href="/AssetsActions/ScrappingAsset/SendRequestForScrapping/@item.InventoryNumber">@Common.Scrap</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<hr />
+<div class="row">
+    <p class="col-md-9">
+    </p>
+    <div>
+        <a id="showAll" style="cursor:pointer" value="Show all">@Common.ShowAll</a>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/Scripts/CookiesJs.js"></script>
+    <script src="~/Areas/AssetsActions/Scripts/Asset/GetAllJS.js"></script>
+}

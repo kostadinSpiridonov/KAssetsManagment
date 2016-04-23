@@ -1,0 +1,44 @@
+﻿@media print {
+    .navbar {
+        display: none;
+    }
+
+    #sidebar {
+        display: none;
+    }
+
+    .printMark {
+        display: table-cell;
+        width: 25%;
+    }
+
+    .printCell > div {
+        display: table-cell;
+    }
+
+    .printCell > .col-md-12 {
+        display: none;
+    }
+
+    .printCell > div > div {
+        display: table-cell;
+    }
+
+        .printCell > div > div > div {
+            display: table-cell;
+        }
+
+    br {
+        display: none;
+    }
+
+    .page-break {
+        display: block;
+        page-break-before: always;
+        top:50px;
+    }
+
+    .frmPrint{
+        display:none;
+    }
+}

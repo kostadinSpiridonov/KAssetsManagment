@@ -1,0 +1,74 @@
+﻿@model KAssets.Areas.Orders.Models.SendReqeustAssetOrderViewModel
+@{
+    ViewBag.Title = "Send request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/styles.css" rel="stylesheet" />
+<style>
+    .font-weight-bold {
+        font-weight: bold;
+    }
+
+    .djam {
+        max-height: 500px !important;
+        overflow-y: scroll;
+    }
+</style>
+<div id="assets" class="hidden djam" title="@AssetOrderTr.ChooseAssets">
+</div>
+
+
+<h2>@AssetOrderTr.SendReqForAsset</h2>
+<hr />
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-12">
+            <h4>@AssetTr.Assets</h4>
+            <br />
+            <div class="col-md-3">
+                @Html.Label(@AssetOrderTr.PleaseSelectAssets, new { @class = "control-label" })
+                <br />
+                <input type="button" class="btn btn-default chooseAssets" value="@Common.Choose" />
+            </div>
+            <div class="col-md-9">
+                <div class="row font-weight-bold">
+                    <div class="col-md-2">@AssetOrderTr.Inventory</div>
+                    <div class="col-md-3">@AssetTr.Brand</div>
+                    <div class="col-md-2">@AssetTr.Model</div>
+                    <div class="col-md-2">@Common.Site</div>
+                    <div class="col-md-2">@AssetTr.Price</div>
+                    <hr />
+                </div>
+                <div id="selectedAssets">
+                </div>
+                <div class="col-md-offset-9">
+                    <hr />
+                    <h4>@Common.Total: <span id="total">0.00</span></h4>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="form-group col-md-12">
+            <br />
+            <div class="col-md-offset-3 col-md-2">
+                <input type="submit" value="@AssetOrderTr.SendRequest" class="btn btn-primary" />
+            </div>
+            <div class="col-md-7">
+                <a href="/Home/Index" class="btn btn-default">@Common.Cancel</a>
+            </div>
+        </div>
+
+    }
+    <input type="hidden" id="notation" />
+</div>
+@section Scripts
+{
+    <script src="~/Areas/Orders/Scripts/AssetOrder/SendRequest.js"></script>
+}

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<KAssets.Areas.Orders.Models.RequestToProviderViewModel>
+@{
+    ViewBag.Title = "Approved requests (Provider order)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ProviderOrderTr.ApprovedRequests</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().FromUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Provider)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DateOfSend)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provider)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfSend)
+            </td>
+            <td>
+                @Html.ActionLink(Common.View, "ViewApprovedRequest", new { id = item.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+@if(Model.Count()==0)
+{
+    <h4>@RelocationTr.NoRequests</h4>
+}

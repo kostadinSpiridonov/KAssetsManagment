@@ -1,0 +1,39 @@
+﻿@model KAssets.Models.ShowUsersViewModel
+@using Microsoft.AspNet.Identity
+
+<table class="table">
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+                {
+                    using (Html.BeginForm("Remove", "UserSite", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="siteId" value="@Model.SiteId" />
+                        <input type="hidden" name="userId" value="@item.Id" />
+                        <div>
+                            <input type="submit" class="btn btn-danger" value="@Common.Remove" />
+                        </div>
+                    }
+                }
+            </td>
+        </tr>
+    }
+    @if(Model.Users.Count==0)
+    {
+        <tr><td><h3>@UserSiteTr.NoUsers</h3></td></tr>
+    }
+    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+    {
+        <tr>
+
+            <td><a href="/Admin/UserSite/Add/@Model.SiteId" class="btn btn-primary">@Common.Add</a></td>
+            <td></td>
+        </tr>
+    }
+</table>

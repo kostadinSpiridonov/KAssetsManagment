@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KAssets.Areas.Invoices.Models.InvoiceListViewModel>
+@{
+    ViewBag.Title = "History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@Common.History</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecipientMOL)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipientMOL)
+            </td>
+            <td>
+                @Html.ActionLink(@Common.View, "ViewHistoryAll", new { id = item.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+@if(Model.Count()==0)
+{
+    <h4>@AssetOrderTr.NoHistory</h4>
+}

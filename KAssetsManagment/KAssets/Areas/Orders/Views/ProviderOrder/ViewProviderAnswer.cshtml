@@ -1,0 +1,99 @@
+﻿@model KAssets.Models.EmailDetailsViewModel
+
+@{
+    ViewBag.Title = "Provider answer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    dd {
+        height: 1.6em; /* or whatever - but use ems :) */
+    }
+
+    .content {
+        height: auto;
+    }
+</style>
+
+<h2>@ProviderOrderTr.ProviderAnswer</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSend)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd class="content">
+            @Html.Raw(Model.Content)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-2">
+        <button class="btn btn-default addOffersBtn float-right">@ProviderOrderTr.AddOffers</button>
+    </div>
+    <button class="btn btn-default addItemsBtn">@ProviderOrderTr.AddItems</button>
+</div>
+<div class="forms addOffers hidden">
+    @Html.Partial("~/Areas/Orders/Views/ProviderOrder/AddProviderOffer.cshtml", Model.Request)
+</div>
+<div class="formsItem addItems hidden">
+    @Html.Partial("~/Areas/Orders/Views/ProviderOrder/AddItem.cshtml", Model.Items)
+</div>
+@section Scripts
+{
+    <script src="~/Areas/Orders/Scripts/ProviderOrder/ViewProviderAnswer.js"></script>
+    <script>
+        $(function () {
+            // This will make every element with the class "date-picker" into a DatePicker element
+            $('.date-picker').datepicker();
+            var currentDate = new Date()
+            var day = currentDate.getDate()
+            var month = currentDate.getMonth() + 1
+            var year = currentDate.getFullYear()
+            $('.date-picker').datepicker("setDate", new Date(year, month, day));
+
+
+            if ("@TempData["Show"]" == "1") {
+                $(".addOffers").removeClass("hidden");
+            }
+            if ("@TempData["Show"]" == "2") {
+                $(".addItems").removeClass("hidden");
+            }
+        })
+    </script>
+}

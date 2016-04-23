@@ -1,0 +1,114 @@
+﻿@model KAssets.Areas.Reports.Models.CreateInvoicesByDateReportViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .inline {
+        display: inline;
+    }
+
+    .margin-left-10px {
+        margin-left: 10px !important;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/styles.css" rel="stylesheet" />
+<h2>@Reports.GetInvoicesByDates</h2>
+
+@using (Html.BeginForm("Result", "InvoicesByDateReport"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrOrAnd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label>@Html.RadioButtonFor(x => x.OrOrAnd, true, new { @class = "margin-left-10px" }) @Common.Or</label>
+                <label>@Html.RadioButtonFor(x => x.OrOrAnd, false, new { @class = "margin-left-10px", @checked = "checked" }) @Common.And</label>
+
+
+                @Html.ValidationMessageFor(model => model.DateOfCreation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfCreation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfCreation, new { htmlAttributes = new { @class = "form-control inline date-picker" } })
+
+                @Html.ValidationMessageFor(model => model.DateOfCreation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfApproving, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfApproving, new { htmlAttributes = new { @class = "form-control inline date-picker" } })
+                @Html.ValidationMessageFor(model => model.DateOfApproving, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentPeriod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PaymentPeriod, new { htmlAttributes = new { @class = "form-control inline date-picker" } })
+                @Html.ValidationMessageFor(model => model.PaymentPeriod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfPayment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfPayment, new { htmlAttributes = new { @class = "form-control inline date-picker" } })
+                @Html.ValidationMessageFor(model => model.DateOfPayment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Paid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Paid)
+                    @Html.ValidationMessageFor(model => model.Paid, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Approved, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Approved)
+                    @Html.ValidationMessageFor(model => model.Approved, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Finished, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Finished)
+                    @Html.ValidationMessageFor(model => model.Finished, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1 margin-r-5">
+                <input type="submit" value="@Reports.Result" class="btn btn-default" />
+            </div>
+            <div class="col-md-8">
+                <a href="/Home/Index" class="btn btn-default">@Common.Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script src="~/Areas/Reports/Scripts/CreateDatePicker.js"></script>
+}

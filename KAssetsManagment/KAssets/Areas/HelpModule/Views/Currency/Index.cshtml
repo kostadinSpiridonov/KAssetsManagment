@@ -1,0 +1,57 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.CurrencyViewModel>
+
+@{
+    ViewBag.Title = "Currency";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNet.Identity
+
+
+<h2>@Common.Currency</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.ActionLink(CurrencyTr.NewCurrency, "Add", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.First().Organisation)
+            </th>
+        }
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organisation)
+                </td>
+            }
+            <td style="background-color:white;">
+                @Html.ActionLink(Common.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>

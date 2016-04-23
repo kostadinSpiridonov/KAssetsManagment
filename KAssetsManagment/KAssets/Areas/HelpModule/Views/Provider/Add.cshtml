@@ -1,0 +1,123 @@
+﻿@model KAssets.Areas.HelpModule.Models.AddProviderViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+<h2>@ProviderTr.AddANewProvider</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bulstat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bulstat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bulstat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-horizontal">
+            <h4> @BillTr.Bill</h4>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bill.IBAN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bill.IBAN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Bill.IBAN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+            {
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SeletedOrganisationId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.SeletedOrganisationId, Model.Organisations.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name })
+                  , ItemTr.SelectOrganisation, new { @class = "form-control", @id = "selectOrganisation" })
+                        @Html.ValidationMessageFor(model => model.SeletedOrganisationId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bill.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Bill.SelectedCurrency, Model.Bill.Currency.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Code })
+
+                    , new { @class = "form-control", @id = "selectCurrency" })
+
+                    @Html.ValidationMessageFor(model => model.Bill.SelectedCurrency, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        @Html.HiddenFor(x=>x.SeletedOrganisationId)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="@Common.Add" class="btn btn-default" />
+            </div>
+            <div class="col-md-9">
+                <a href="/HelpModule/Provider/GetAll" class="btn btn-default">@Common.Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+<script>
+        $("#selectOrganisation").change(function () {
+            var id = $(this).val();
+            $.get("/Items/Item/OrganisationCurrencies/" + id).done(function (data) {
+                var mySelect = $('#selectCurrency');
+                mySelect.find("*").remove();
+                $.each(data, function (i) {
+                    mySelect.append(
+                        $('<option></option>').val(data[i].Id).html(data[i].Code)
+                    );
+                });
+            });
+
+        });
+</script>
+}

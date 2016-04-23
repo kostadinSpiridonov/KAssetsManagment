@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddedOffers" xml:space="preserve">
+    <value>Виеш сте добавили оферти за тази поръчка !</value>
+  </data>
+  <data name="AddFormForItem" xml:space="preserve">
+    <value>Добави форма за артикул</value>
+  </data>
+  <data name="AddItems" xml:space="preserve">
+    <value>Добави артикули</value>
+  </data>
+  <data name="AddOffers" xml:space="preserve">
+    <value>Добави оферта</value>
+  </data>
+  <data name="ApprovedOffers" xml:space="preserve">
+    <value>Одобрени оферти</value>
+  </data>
+  <data name="ApprovedRequests" xml:space="preserve">
+    <value>Одобрени заявки (Поръчка от доставчик)</value>
+  </data>
+  <data name="Body" xml:space="preserve">
+    <value>Тяло</value>
+  </data>
+  <data name="ContentIsRequired" xml:space="preserve">
+    <value>Полето "Съдържание" е задължително.</value>
+  </data>
+  <data name="DateOfSend" xml:space="preserve">
+    <value>Дата на изпращане</value>
+  </data>
+  <data name="DeclineRequestToProvider" xml:space="preserve">
+    <value>Отказване на заявка към доставчик</value>
+  </data>
+  <data name="EixstReq" xml:space="preserve">
+    <value>Няма поръчка с това ид !</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="GiveItems" xml:space="preserve">
+    <value>Предаdeni артикулите</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Артикули</value>
+  </data>
+  <data name="Offers" xml:space="preserve">
+    <value>Оферти</value>
+  </data>
+  <data name="OrderFinished" xml:space="preserve">
+    <value>Поръчката е завършена !</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>Ид поръчка</value>
+  </data>
+  <data name="OrderIdIsRequired" xml:space="preserve">
+    <value>Полето "Ид поръчка" е задължително.</value>
+  </data>
+  <data name="PleaseSelectitems" xml:space="preserve">
+    <value>Моля, изберете артикули !</value>
+  </data>
+  <data name="ProviderAnswer" xml:space="preserve">
+    <value>Отговор от доставчик</value>
+  </data>
+  <data name="ProviderAnswers" xml:space="preserve">
+    <value>Отговори от доставичка</value>
+  </data>
+  <data name="ProviderEmail" xml:space="preserve">
+    <value>Имейл на доставчика</value>
+  </data>
+  <data name="ProviderIsRequired" xml:space="preserve">
+    <value>Полето "Доставчик" е задължително.</value>
+  </data>
+  <data name="RemoveFormForItem" xml:space="preserve">
+    <value>Премахни форма за артикул</value>
+  </data>
+  <data name="RequestsForApproving" xml:space="preserve">
+    <value>Заявки за одобрение (Поръчка от доставчик)</value>
+  </data>
+  <data name="SelectItems" xml:space="preserve">
+    <value>Избери артикули</value>
+  </data>
+  <data name="SelectOrganisation" xml:space="preserve">
+    <value>Изберете организация</value>
+  </data>
+  <data name="SendRequestToProvider" xml:space="preserve">
+    <value>Изпрати заявка към доставчик</value>
+  </data>
+  <data name="SentEmail" xml:space="preserve">
+    <value>Изпратен имейл</value>
+  </data>
+  <data name="SentRequests" xml:space="preserve">
+    <value>Изпратени заявки (Поръчка доставчик)</value>
+  </data>
+  <data name="SoonReceive" xml:space="preserve">
+    <value>Скоро ще ви се достави поръчката</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Предмет</value>
+  </data>
+  <data name="SubjectIsRequired" xml:space="preserve">
+    <value>Полето "Предмет" е задължително.</value>
+  </data>
+  <data name="SuccessSending" xml:space="preserve">
+    <value>Вие успешно изпратихте заявка до доставчика !</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Към</value>
+  </data>
+  <data name="ViewApprovedRequest" xml:space="preserve">
+    <value>Одобрена заявка (Поръчка доставчик)</value>
+  </data>
+  <data name="ViewHistoryRequest" xml:space="preserve">
+    <value>Заявка история (Поръчка доставчик)</value>
+  </data>
+  <data name="ViewRequestForApproving" xml:space="preserve">
+    <value>Заявка за одобрение (Поръчка доставичк)</value>
+  </data>
+  <data name="WantItems" xml:space="preserve">
+    <value>Поискани артикули</value>
+  </data>
+</root>

@@ -1,0 +1,67 @@
+﻿@model KAssets.Areas.Admin.Models.OrganisationViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@OrganisationTr.AddNewOrganisation</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>@OrganisationTr.EmailClient</h4>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmaiClient, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmaiClient, new { htmlAttributes = new { @class = "form-control" } })
+                <div style="color:red">
+                   * @OrganisationTr.CofigYouEmail
+                   <br />
+                    * @OrganisationTr.EmailMustBeOutlook
+                </div>
+                @Html.ValidationMessageFor(model => model.EmaiClient, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailClientPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailClientPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailClientPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="@Common.Create" class="btn btn-default" />
+            </div>
+            <div class="col-md-9">
+                <a href="/Admin/Organisation/GetAll" class="btn btn-default">@Common.Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+

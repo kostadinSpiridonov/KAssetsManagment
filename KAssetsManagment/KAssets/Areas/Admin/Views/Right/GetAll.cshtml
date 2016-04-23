@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KAssets.Areas.Admin.Models.RightViewModel>
+
+@{
+    ViewBag.Title = "Rights";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@KAssets.Resources.Translation.Common.Rights</h2>
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desciption)
+            </td>
+        </tr>
+    }
+
+</table>

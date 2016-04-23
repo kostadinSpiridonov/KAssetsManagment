@@ -1,0 +1,127 @@
+﻿@model KAssets.Areas.AssetsActions.Models.ScrappingHistoryRequest
+@{
+    ViewBag.Title = "History request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@ScrappingTr.ScrappingRequest</h2>
+
+    <dl class="dl-horizontal">
+        <div>
+            <br />
+            <h4>@ScrappingTr.Sender</h4>
+            <hr />
+        </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.FromName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromName)
+        </dd>
+        <div>
+            <br />
+            <h4>@ScrappingTr.AssetDetails</h4>
+            <hr />
+        </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.InventoryNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InventoryNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Producer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemModel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Guarantee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guarantee)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price) 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)@(" " + Model.Currency)
+        </dd>
+        <dt>
+            @Html.DisplayName(Common.Site)
+        </dt>
+        <dd>
+            @Model.SiteName
+        </dd>
+        <dt>
+            @Html.DisplayName(Common.Location)
+        </dt>
+        <dd>
+            @if (Model.Location != null)
+            {
+                <div>
+                    @if (Model.Location.Country != null)
+                    {
+                        @Model.Location.Country
+                    }
+                    @if (Model.Location.Town != null)
+                    {
+                        @Model.Location.Town
+                    }
+                    @if (Model.Location.Street != null)
+                    {
+                        @Model.Location.Street
+                    }
+                    @((Model.Location.StreetNumber != null && Model.Location.StreetNumber.Value != 0 ? Model.Location.StreetNumber.Value.ToString() : ""))
+                    @Model.Location.Latitude @Model.Location.Longitude
+                </div>
+            }
+        </dd>
+        <div>
+            <br />
+            <h4>@Common.Result</h4>
+            <hr />
+        </div>
+        <dt>
+            @Html.DisplayName(ScrappingTr.IsApproved)
+        </dt>
+        <dd>
+            <input type="checkbox" value="@Model.IsApproved" disabled checked="@Model.IsApproved" />
+        </dd>
+    </dl>
+
+
+
+

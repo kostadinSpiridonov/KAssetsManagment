@@ -1,0 +1,73 @@
+﻿@model KAssets.Areas.HelpModule.Models.ViewAccidentViewModel
+
+@{
+    ViewBag.Title = "Accident to answer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@AccidentTr.ViewAccToAnswer</h2>
+<style>
+    .messageBox{
+        min-width:500px  !important;
+        max-width:500px !important;
+        height:200px !important;
+    }
+</style>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+    </dl>
+</div>
+
+@using (Html.BeginForm("SetAnswer","Accident"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Label(AccidentTr.Answer, htmlAttributes: new { @class = "control-label" })
+            </dt>
+            <dd >
+                @Html.TextArea("Answer", new { @class = "form-control messageBox" })
+                <span class="text-danger">@TempData["DellError"]</span>
+                
+            </dd>
+        </dl>
+
+        <input type="hidden" name="Id" value="@Model.Id">
+        <dl class="dl-horizontal">
+            <dd >
+                <input type="submit" value="@Common.Send" class="btn btn-default" />
+                <a href="/HelpModule/Accident/ToAnswer" class="btn btn-default">@Common.Cancel</a>
+            </dd>
+        </dl>
+    </div>
+}
+

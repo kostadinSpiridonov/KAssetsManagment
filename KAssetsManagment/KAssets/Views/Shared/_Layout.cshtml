@@ -1,0 +1,660 @@
+﻿<!DOCTYPE html>
+@using Microsoft.AspNet.Identity
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - KAssets </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" href="~/gear.ico">
+    <link href="~/Content/Dashboard/AdminLTE.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="~/Content/Layout.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="mainDiv">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container width-100">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("KAssets Managment", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <ul class="nav navbar-nav" style="height:50px; padding-top:7px">
+                        <li>
+                            <button type="button" style="border: 0; background: transparent" value="En" class="tr">
+                                <img src="~/Content/United-Kingdom-Flag-1-icon.png" width="35" height="31" style="margin-top:2px" />
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" style="border: 0; background: transparent" value="Bg" class="tr">
+                                <img src="~/Content/Bulgaria-icon.png" width="35" height="35" alt="submit" />
+                            </button>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+                <div class="navbar-collapse collapse">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="row row-offcanvas row-offcanvas-left">
+
+                    <div class="col-sm-2 col-md-2 col-xs-2 sidebar-offcanvas" id="sidebar" role="navigation">
+                        <div class="position-fixed leftNavbar">
+                            <ul class="nav nav-sidebar ulSdb">
+
+                                <li>
+                                    <a href="/Home/Index" title="@Common.Home"><i class=" fa fa-dashboard hidden-sm"></i> <span> @Common.Home</span></a>
+                                </li>
+
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+                                    {
+                                        <li>
+                                            <a href="/Admin/Organisation/GetAll" title="@OrganisationTr.Organisations"><i class="fa fa-users hidden-sm"></i> <span> @OrganisationTr.Organisations</span></a>
+                                        </li>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/Admin/User/GetAll" title="@Common.Users"><i class="fa fa-user"></i> @Common.Users</a></li>
+                                        <li><a href="/Admin/SecurityGroup/GetAll" title="@Common.SecurityGroups"><i class="fa fa-user-secret"></i> @Common.SecurityGroups</a></li>
+                                        <li><a href="/Admin/Right/GetAll" title="@Common.Rights"><i class=" fa fa-exclamation"></i> @Common.Rights</a></li>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage assets", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/AssetsActions/Asset/GetAll" title="@AssetTr.Assets"><i class="fa fa-tasks"></i> @AssetTr.Assets</a></li>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for item", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve order for item", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Give items for item order", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for asset", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve orders for asset", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Give assets for asset orders", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request to provider", User.Identity.GetUserId()) ||
+                                    KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request to provider", User.Identity.GetUserId()))
+                                    {
+                                        <li data-toggle="collapse" data-target="#orders" class="collapsed">
+                                            @*<a href="/Orders/Index">Orders</a>*@
+                                            <a href="#" title="@Common.Orders">
+                                                <i class="fa fa-shopping-cart hidden-sm"></i>
+                                                @Common.Orders
+                                                <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                            </a>
+                                        </li>
+                                        <ul class="sub-menu collapse" id="orders" style="list-style:none">
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for item", User.Identity.GetUserId()) ||
+                                KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve order for item", User.Identity.GetUserId()) ||
+                                KAssets.Controllers.StaticFunctions.IsHasRihgt("Give items for item order", User.Identity.GetUserId()))
+                                            {
+                                                <li data-toggle="collapse" data-target="#itemOrderM" class="collapsed">
+                                                    <a href="#" title="@Common.ItemOrder">
+                                                        @Common.ItemOrder
+                                                        <span class="glyphicon glyphicon-arrow-down " style="float:right; margin-right:20px;"></span>
+                                                    </a>
+                                                </li>
+                                                <ul class="sub-menu collapse" id="itemOrderM" style="list-style:none">
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for item", User.Identity.GetUserId()))
+                                                    {
+                                                    <li> <a href="/Orders/ItemOrder/SendRequest" title="@Common.SendRequest">@Common.SendRequest</a></li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve order for item", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="reqForAprItemOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/ItemOrder/GetAllRequestsForAproving" class="labelCC" title="@Common.RequestsForApproving">
+                                                            @Common.RequestsForApproving
+                                                        </a>
+                                                    </li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Give items for item order", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="approvedReqItemOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/ItemOrder/ViewApprovedRequests" class="labelCC" title="@Common.ApprovedRequrests">@Common.ApprovedRequrests</a>
+                                                    </li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for item", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="reqForFinishItemOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/ItemOrder/RequestForFinishing" class="labelCC" title="@Common.RequestsForFinishing">@Common.RequestsForFinishing</a>
+                                                    </li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for item", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/ItemOrder/HistoryRequests" title="@Common.YourHistory">@Common.YourHistory</a></li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve order for item", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/ItemOrder/HistoryRequestsAll" title="@Common.AllHistory">@Common.AllHistory</a></li>
+                                                    }
+
+                                                </ul>
+                                            }
+
+                                            @if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for asset", User.Identity.GetUserId())) ||
+                                KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve orders for asset", User.Identity.GetUserId()) ||
+                                KAssets.Controllers.StaticFunctions.IsHasRihgt("Give assets for asset orders", User.Identity.GetUserId()))
+                                            {
+                                                <li data-toggle="collapse" data-target="#assetOrderM" class="collapsed">
+                                                    <a href="#" title="@Common.AssetOrder">
+                                                        @Common.AssetOrder
+                                                        <span class="glyphicon glyphicon-arrow-down " style="float:right; margin-right:20px;"></span>
+                                                    </a>
+                                                </li>
+                                                <ul class="sub-menu collapse" id="assetOrderM" style="list-style:none">
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for asset", User.Identity.GetUserId()))
+                                                    {
+                                                    <li> <a href="/Orders/AssetOrder/SendRequest" title="@Common.SendRequest">@Common.SendRequest</a></li>
+                                                    }
+
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve orders for asset", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="reqForAprAssetOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/AssetOrder/GetAllRequestsForAproving" title="@Common.RequestsForApproving">@Common.RequestsForApproving</a>
+                                                    </li>
+                                                    }
+
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Give assets for asset orders", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="apprReqAssetOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/AssetOrder/ViewApprovedRequests" title="@Common.ApprovedRequrests">@Common.ApprovedRequrests</a>
+                                                    </li>
+                                                    }
+
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for asset", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="reqForFinAssetOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/AssetOrder/RequestForFinishing" title="@Common.RequestsForFinishing">@Common.RequestsForFinishing</a>
+                                                    </li>
+                                                    }
+
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create order for asset", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/AssetOrder/HistoryRequests" title="Your history">@Common.YourHistory</a></li>
+                                                    }
+
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve orders for asset", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/AssetOrder/HistoryRequestsAll" title="All history">@Common.AllHistory</a></li>
+                                                    }
+                                                </ul>
+                                            }
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request to provider", User.Identity.GetUserId()) ||
+                                KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request to provider", User.Identity.GetUserId()))
+                                            {
+                                                <li data-toggle="collapse" data-target="#providerOrderM" class="collapsed">
+                                                    <a href="#" title="@Common.ProviderOrderO">
+                                                        @Common.ProviderOrderO
+                                                        <span class="glyphicon glyphicon-arrow-down " style="float:right; margin-right:20px;"></span>
+                                                    </a>
+                                                </li>
+                                                <ul class="sub-menu collapse" id="providerOrderM" style="list-style:none">
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request to provider", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/ProviderOrder/CreateRequest" title="@Common.SendRequest">@Common.SendRequest</a></li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request to provider", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/ProviderOrder/HistoryRequests" title="@Common.History">@Common.History</a></li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request to provider", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/ProviderOrder/ProviderAnswers" title="@Common.Inbox">@Common.Inbox</a></li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request to provider", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="reqForApprProvOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/ProviderOrder/GetRequestsForApproving" title="@Common.RequestsForApproving">@Common.RequestsForApproving</a>
+                                                    </li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request to provider", User.Identity.GetUserId()))
+                                                    {
+                                                    <li>
+                                                        <span id="apprReqProvOrd" class="label label-danger countLabel"></span>
+                                                        <a href="/Orders/ProviderOrder/GetApprovedRequests" title="@Common.ApprovedRequrests">@Common.ApprovedRequrests</a>
+                                                    </li>
+                                                    }
+                                                    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request to provider", User.Identity.GetUserId()))
+                                                    {
+                                                    <li><a href="/Orders/ProviderOrder/HistoryRequestsAll" title="@Common.AllHistory">@Common.AllHistory</a></li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </ul>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage items", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/Items/Item/GetAll" title="@Common.Items"><i class="fa fa-cubes hidden-sm"></i> <span> @Common.Items</span></a></li>
+                                    }
+
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage locations", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/HelpModule/Location/Index" title="@LocationTr.Locations"><i class="fa fa-map-marker hidden-sm"></i> @LocationTr.Locations</a></li>
+                                    }
+
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+
+                                    <li>
+                                        <a href="/Event/GetAllForUser" title="@Common.Events">
+                                            <span class="label label-primary countLabel countLBR"></span>
+                                            <i class="fa fa-bell-o hidden-sm"></i> @Common.Events
+                                        </a>
+                                    </li>
+
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for scrapping", User.Identity.GetUserId()))
+                                    ||
+                                    (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage assets", User.Identity.GetUserId())))
+                                    {
+                                        @*
+                                            <li><a href="/ScrappingAsset/Scrapping">Scrapping</a></li>*@
+                                        <li data-toggle="collapse" data-target="#scrapping" class="collapsed">
+                                            @*<a href="/Orders/Index">Orders</a>*@
+                                            <a href="#" title="@Common.Scrapping">
+                                                <i class="fa fa-trash-o hidden-sm"></i>
+                                                @Common.Scrapping
+                                                <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                            </a>
+                                        </li>
+                                        <ul class="sub-menu collapse" id="scrapping" style="list-style:none">
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for scrapping", User.Identity.GetUserId()))
+                                            {
+                                                <li>
+
+                                                    <span id="scrReq" class="label label-danger countLabel"></span>
+                                                    <a href="/AssetsActions/ScrappingAsset/RequestsForApproving" title="@Common.RequestsForApproving">@Common.RequestsForApproving</a>
+                                                </li>
+                                            }
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage assets", User.Identity.GetUserId()))
+                                            {
+                                                <li><a href="/AssetsActions/ScrappingAsset/HistoryRequests" title="@Common.YourHistory">@Common.YourHistory</a></li>
+                                            }
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for scrapping", User.Identity.GetUserId()))
+                                            {
+                                                <li><a href="/AssetsActions/ScrappingAsset/AllHistoryRequests" title="@Common.AllHistory">@Common.AllHistory</a></li>
+                                            }
+                                        </ul>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+
+                                    //if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for relocation", User.Identity.GetUserId()))
+                                    //||
+                                    //(KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for relocation", User.Identity.GetUserId())))
+                                    //{
+                                        <li data-toggle="collapse" data-target="#relocationM" class="collapsed">
+                                            <a href="#" title="@Common.Relocation">
+                                                <i class="fa fa-location-arrow hidden-sm"></i>
+                                                @Common.Relocation
+                                                <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                            </a>
+                                        </li>
+                                        <ul class="sub-menu collapse" id="relocationM" style="list-style:none">
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for relocation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <a href="/AssetsActions/RelocationAsset/CreaterelocationRequest" title="@Common.SendRequest">@Common.SendRequest</a>
+                                            </li>
+                                            }
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for relocation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="reqForApprRel" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RelocationAsset/GetRequestsForApproving" title="@Common.RequestsForApproving">@Common.RequestsForApproving</a>
+                                            </li>
+                                            }
+                                            @*@if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for relocation", User.Identity.GetUserId()))
+                                            {*@
+                                            <li>
+                                                <span id="reqIssRel" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RelocationAsset/RequestsForIssueWithUser" title="@Common.YourRequestsForIssue">@Common.YourRequestsForIssue</a>
+                                            </li>
+                                            @*}*@
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for relocation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="reqIssAllRel" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RelocationAsset/RequestsForIssueWithOutUser" title="@Common.AllRequestsForIssue">@Common.AllRequestsForIssue</a>
+                                            </li>
+                                            }
+
+                                            @*@if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for relocation", User.Identity.GetUserId()))
+                                            {*@
+                                            <li>
+                                                <span id="reqRecRel" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RelocationAsset/RequestsForReceivingWithUser" title="@Common.YourRequestsForReceive">@Common.YourRequestsForReceive</a>
+                                            </li>
+                                            @*}*@
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for relocation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="reqRecAllRel" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RelocationAsset/RequestsForReceivingWithOutUser" title="@Common.AllRequestsForReceive">@Common.AllRequestsForReceive</a>
+                                            </li>
+                                            }
+
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for relocation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <a href="/AssetsActions/RelocationAsset/HistoryRequests" title="@Common.YourHistory">@Common.YourHistory</a>
+                                            </li>
+                                            }
+
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for relocation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <a href="/AssetsActions/RelocationAsset/AllHistoryRequests" title="@Common.AllHistory">@Common.AllHistory</a>
+                                            </li>
+                                            }
+
+
+                                        </ul>
+                                    //}
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for renovation", User.Identity.GetUserId()))
+                                    ||
+                                    (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for renovation", User.Identity.GetUserId()))
+                                    ||
+                                    (KAssets.Controllers.StaticFunctions.IsHasRihgt("Renovate assets", User.Identity.GetUserId())))
+                                    {
+                                        <li data-toggle="collapse" data-target="#renovationM" class="collapsed">
+                                            <a href="#" title="@Common.Renovation">
+                                                <i class="fa fa-repeat hidden-sm"></i>
+                                                @Common.Renovation
+                                                <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                            </a>
+                                        </li>
+                                        <ul class="sub-menu collapse" id="renovationM" style="list-style:none">
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for renovation", User.Identity.GetUserId()))
+                                            {
+                                            <li><a href="/AssetsActions/RenovationAsset/CreateRequestForRenovation" title="@Common.SendRequest">@Common.SendRequest</a></li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for renovation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="reqForApprRen" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RenovationAsset/GetRequestsForApproving" title="@Common.RequestsForApproving">@Common.RequestsForApproving</a>
+                                            </li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for renovation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="apprReqRen" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RenovationAsset/GetApprovedRequestsForUser" title="@Common.ApprovedRequrests">@Common.ApprovedRequrests</a>
+                                            </li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Renovate assets", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="assetForRen" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RenovationAsset/GetAssetsForRenovating" title="@Common.AssetsForRenovating">@Common.AssetsForRenovating</a>
+                                            </li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for renovation", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="retAssetsRen" class="label label-danger countLabel"></span>
+                                                <a href="/AssetsActions/RenovationAsset/ReturnedAssets" title="@Common.ReturnedAssets">@Common.ReturnedAssets</a>
+                                            </li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Send request for renovation", User.Identity.GetUserId()))
+                                            {
+                                            <li><a href="/AssetsActions/RenovationAsset/HistoryRequests" title="@Common.YourHistory">@Common.YourHistory</a></li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve request for renovation", User.Identity.GetUserId()))
+                                            {
+                                            <li><a href="/AssetsActions/RenovationAsset/AllHistoryRequests" title="@Common.AllHistory">@Common.AllHistory</a></li>
+                                            }
+
+                                        </ul>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage providers", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/HelpModule/Provider/GetAll" title="@ProviderTr.Providers"><i class="fa fa-truck hidden-sm"></i> @ProviderTr.Providers</a></li>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage currency", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/HelpModule/Currency/Index" title="@Common.Currency"><i class="fa fa-money hidden-sm"></i> @Common.Currency</a></li>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Create invoice", User.Identity.GetUserId()))
+                                    ||
+                                    (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve invoice", User.Identity.GetUserId()))
+                                    ||
+                                    (KAssets.Controllers.StaticFunctions.IsHasRihgt("Pay invoice", User.Identity.GetUserId())))
+                                    {
+                                        <li data-toggle="collapse" data-target="#invoicesM" class="collapsed">
+                                            <a href="#" title="@Common.Invoices">
+                                                <i class="fa fa-file-text-o hidden-sm"></i>
+                                                @Common.Invoices
+                                                <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                            </a>
+                                        </li>
+                                        <ul class="sub-menu collapse" id="invoicesM" style="list-style:none">
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create invoice", User.Identity.GetUserId()))
+                                            {
+                                            <li><a href="/Invoices/Invoice/Add" title="@Common.Create">@Common.Create</a></li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve invoice", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="invForAppr" class="label label-danger countLabel"></span>
+                                                <a href="/Invoices/Invoice/InvoicesForApproving" title="@Common.InvoicesForApproving">@Common.InvoicesForApproving</a>
+                                            </li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Pay invoice", User.Identity.GetUserId()))
+                                            {
+                                            <li>
+                                                <span id="invForPaid" class="label label-danger countLabel"></span>
+                                                <a href="/Invoices/Invoice/GetInvoicesForPaid" title="@Common.InvoicesForPaid">@Common.InvoicesForPaid</a>
+                                            </li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Create invoice", User.Identity.GetUserId()))
+                                            {
+                                            <li><a href="/Invoices/Invoice/History" title="@Common.YourHistory">@Common.YourHistory</a></li>
+                                            }
+                                            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Approve invoice", User.Identity.GetUserId()))
+                                            {
+                                            <li><a href="/Invoices/Invoice/HistoryAll" title="@Common.AllHistory">@Common.AllHistory</a></li>
+                                            }
+                                        </ul>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Manage exchange rates", User.Identity.GetUserId()))
+                                    {
+                                        <li><a href="/HelpModule/ExchangeRate/Index" title="@ExchangeRateTr.ExchangeRates"><i class="fa fa-exchange hidden-sm"></i> @ExchangeRateTr.ExchangeRates</a></li>
+                                    }
+
+                                    //----------------------------------------------------------------------------------------------------------------
+
+                                    <li data-toggle="collapse" data-target="#accidents" class="collapsed">
+                                        <a href="#" title="@Common.Accidents">
+                                            <i class="fa fa-bug hidden-sm"></i>
+                                            @Common.Accidents
+                                            <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                        </a>
+                                    </li>
+                                    <ul class="sub-menu collapse" id="accidents" style="list-style:none">
+                                        <li><a href="/HelpModule/Accident/Add" title="@Common.Create">@Common.Create</a></li>
+                                        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Responding to incidents", User.Identity.GetUserId()))
+                                        {
+                                            <li>
+                                                <span id="accForAnswer" class="label label-danger countLabel"></span>
+                                                <a href="/HelpModule/Accident/ToAnswer" title="@Common.ForAnswering">@Common.ForAnswering</a>
+                                            </li>
+                                        }
+                                        <li>
+                                            <span id="accAnswers" class="label label-danger countLabel"></span>
+                                            <a href="/HelpModule/Accident/GetAnswers" title="@Common.Answers">@Common.Answers</a>
+                                        </li>
+                                    </ul>
+
+                                        //----------------------------------------------------------------------------------------------------------------
+                                        if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for accidents by date", User.Identity.GetUserId()))
+                                        ||
+                                        (KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for invoices by date", User.Identity.GetUserId()))
+                                        ||
+                                        (KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for asset relocations", User.Identity.GetUserId()))
+                                        ||
+                                        (KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for renovated assets", User.Identity.GetUserId()))
+                                        ||
+                                        (KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for assets by status", User.Identity.GetUserId())))
+                                        {
+                                            <li data-toggle="collapse" data-target="#reports" class="collapsed">
+                                                <a href="#" title="@Common.Reports">
+                                                    <i class="fa fa-hourglass-end"></i>
+                                                    @Common.Reports
+                                                    <span class="glyphicon glyphicon-arrow-down " style="float:right"></span>
+                                                </a>
+                                            </li>
+                                            <ul class="sub-menu collapse" id="reports" style="list-style:none">
+                                                @if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for invoices by date", User.Identity.GetUserId())))
+                                                {
+                                                    <li><a href="/Reports/InvoicesByDateReport/Create" title="@Common.InvoicesByDate">@Common.InvoicesByDate</a></li>
+                                                }
+                                                @if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for asset relocations", User.Identity.GetUserId())))
+                                                {
+                                                    <li><a href="/Reports/AssetRelocationsReport/Create" title="@Common.RelocationsForAsset">@Common.RelocationsForAsset</a></li>
+                                                }
+                                                @if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for assets by status", User.Identity.GetUserId())))
+                                                {
+                                                    <li><a href="/Reports/AssetStatus/CreateReport" title="@Common.AssetsByStatus">@Common.AssetsByStatus</a></li>
+                                                }
+                                                @if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for accidents by date", User.Identity.GetUserId())))
+                                                {
+                                                    <li><a href="/Reports/AccidentsByDate/CreateReport" title="@Common.AccidentsByDate">@Common.AccidentsByDate</a></li>
+                                                }
+                                                @if ((KAssets.Controllers.StaticFunctions.IsHasRihgt("Report for renovated assets", User.Identity.GetUserId())))
+                                                {
+                                                    <li><a href="/Reports/RenovatedAssetsReport/Create" title="@Common.RenovatedAssetsByDate">@Common.RenovatedAssetsByDate</a></li>
+                                                }
+                                            </ul>
+                                        }
+                                    //----------------------------------------------------------------------------------------------------------------
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10 col-md-10 col-xs-10 main border-side-bar mainBody">
+                        @RenderBody()
+
+                    </div>
+                </div>
+                <hr />
+                <footer class="background-body footer">
+                    <p>&copy; @DateTime.Now.Year - KAssets </p>
+                </footer>
+            }
+            else
+            {
+                <div class="container body-content">
+                    @RenderBody()
+                </div>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script src="~/Scripts/KAssetsJS/Shared/Layout.js"></script>
+<script>
+    //Set user not authenticated style
+    if ("@User.Identity.IsAuthenticated.ToString()" == "False") {
+        $(".mainDiv").css("background", "linear-gradient(#000 1px, #3C3C3C 100%)")
+        $(".mainDiv").css("position", "absolute")
+        $(".mainDiv").css("width", "100%")
+        $(".mainDiv").css("height", $(document).height())
+        $(".mainDiv").css("margin-top", "-50px")
+        $(".navbar").addClass("hidden");
+    }
+
+
+    function createCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+        $(".tr").click(function () {
+
+            eraseCookie("_lang");
+            createCookie("_lang", $(this).val().toLowerCase(), 10);
+            location.reload();
+        })
+    
+</script>

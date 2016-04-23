@@ -1,0 +1,94 @@
+﻿@model IEnumerable<KAssets.Areas.Orders.Models.RequestToProviderInvoiceModel>
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+
+
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchByOrder">
+            <option value="Id">
+                @Html.DisplayNameFor(model => model.First().Id)
+            </option>
+            <option value="From">
+                @Html.DisplayNameFor(model => model.First().FromName)
+            </option>
+            <option value="Provider">
+                @Html.DisplayNameFor(model => model.First().ProviderEmail)
+            </option>
+            <option value="Date of send">
+                @Html.DisplayNameFor(model => model.First().DateOfSend)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline" id="searchValueOrder" />
+    </div>
+</div>
+<br />
+<div class="tableOuter">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FromName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ProviderEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DateOfSend)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="id">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="name">
+                    @Html.DisplayFor(modelItem => item.FromName)
+                </td>
+                <td class="email">
+                    @Html.DisplayFor(modelItem => item.ProviderEmail)
+                </td>
+                <td class="date">
+                    @Html.DisplayFor(modelItem => item.DateOfSend)
+                </td>
+                <td>
+                    <button class="order btn btn-default" id="@item.Id" providerid="@item.ProviderId">@Common.Choose</button>
+                    <div class="hidden">
+                        @foreach (var item1 in item.Offers)
+                        {
+                            <div class="orderItem">
+                                <div class="brand">
+                                    @Html.DisplayFor(modelItem => item1.Brand)
+                                </div>
+                                <div class="model">
+                                    @Html.DisplayFor(modelItem => item1.Model)
+                                </div>
+                                <div class="price">
+                                    @Html.DisplayFor(modelItem => item1.Price)
+                                    @Html.DisplayFor(modelItem => item1.Currency)
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Choose" class="item btn btn-default" id="@item1.Id" />
+
+                                    <input type="hidden" value="@item1.Price" />
+                                    <input type="hidden" value="@item1.Currency" />
+                                    <input type="hidden" value="@item1.CurrencyCourse" />
+                                    <input type="hidden" value="@item1.Quantity" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+
+        }
+
+    </table>
+
+</div>

@@ -1,0 +1,55 @@
+﻿@model KAssets.Areas.Reports.Models.RenovatedAssetsReportResultViewModel
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Reports.Result</h2>
+
+<div class="col-md-12">
+    <br />
+    <h3>@Reports.RenovateAssetsBetween @Model.FromDate @Common.And.ToLower() @Model.ToDate</h3>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName(KAssets.Resources.Translation.AssetsTr.AssetTr.InventoryNumber)
+            </th>
+            <th>
+                @Html.DisplayName(KAssets.Resources.Translation.AssetsTr.AssetTr.Brand)
+            </th>
+            <th>
+                @Html.DisplayName(KAssets.Resources.Translation.AssetsTr.AssetTr.Model)
+            </th>
+            <th>
+                @Html.DisplayName(Common.Site)
+            </th>
+            <th>
+                @Html.DisplayName(KAssets.Resources.Translation.AssetsTr.AssetTr.Price)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Assets)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayName(item.InventoryNumber)
+                </td>
+                <td>
+                    @Html.DisplayName(item.Brand)
+                </td>
+                <td>
+                    @item.AssetModel
+                </td>
+                <td>
+                    @item.SiteName
+                </td>
+                <td>
+                    @item.Price @item.Currency
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

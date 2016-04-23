@@ -1,0 +1,206 @@
+﻿@model KAssets.Areas.Orders.Models.BaseRequestForAssetViewModel
+@{
+    if (Model.Request.IsFinished)
+    {
+        ViewBag.Title = "Finished request";
+    }
+    else
+    {
+        ViewBag.Title = "Request for finishing";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Request.IsFinished)
+{
+    <h2>@AssetOrderTr.FinishedRequest</h2>
+}
+else
+{
+    <h2>@AssetOrderTr.RequestsForFinishing</h2>
+}
+<br />
+
+<div>
+    <h4>@AssetOrderTr.Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.DateOfSend)
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.DateOfSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.From)
+        </dt>
+        <dd>
+            @Model.Request.From.FullName
+        </dd>
+    </dl>
+</div>
+<br />
+
+@if (Model.Request.PackingSlipId != 0 && Model.Request.IsFinished)
+{
+    <hr />
+    <div>
+        @{Html.RenderAction("GetPartialDetails", "PackingSlip", new { id = @Model.Request.PackingSlipId ,area=""});}
+    </div>
+    <br />
+}
+
+<hr />
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <h4>@AssetOrderTr.WantAssets</h4>
+
+        <div class="col-md-12">
+            <div class="dt-horizontal" style="font-weight:bold">
+                <div class="col-md-2">@AssetTr.InventoryNumber</div>
+                <div class="col-md-3">@AssetTr.Brand</div>
+                <div class="col-md-3">@AssetTr.Model</div>
+                <div class="col-md-2">@Common.Site</div>
+                <div class="col-md-1">@AssetTr.Price</div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+
+            @for (int i = 0; i < Model.WantAssets.Count; i++)
+            {
+                <div class="panel panel-default row">
+                    <div class="col-md-2">@Model.WantAssets[i].Asset.InventoryNumber</div>
+                    <div class="col-md-3">@Model.WantAssets[i].Asset.Brand</div>
+                    <div class="col-md-3">@Model.WantAssets[i].Asset.AssetModel</div>
+                    <div class="col-md-2">@Model.WantAssets[i].Asset.SiteName</div>
+                    <div class="col-md-1">@Model.WantAssets[i].Asset.Price<span>@(" " + Model.WantAssets[i].Asset.Currency)</span></div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<hr />
+
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <h4>@AssetOrderTr.ApprovedAssets</h4>
+        @if (Model.IsApproved)
+        {
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.InventoryNumber</div>
+                    <div class="col-md-3">@AssetTr.Brand</div>
+                    <div class="col-md-3">@AssetTr.Model</div>
+                    <div class="col-md-2">@Common.Site</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+
+                @for (int i = 0; i < Model.ApprovedAssets.Count; i++)
+                {
+                    <div class="panel panel-default row">
+                        <div class="col-md-2">@Model.ApprovedAssets[i].Asset.InventoryNumber</div>
+                        <div class="col-md-3">@Model.ApprovedAssets[i].Asset.Brand</div>
+                        <div class="col-md-3">@Model.ApprovedAssets[i].Asset.AssetModel</div>
+                        <div class="col-md-2">@Model.ApprovedAssets[i].Asset.SiteName</div>
+                        <div class="col-md-1">@Model.ApprovedAssets[i].Asset.Price<span>@(" " + Model.WantAssets[i].Asset.Currency)</span></div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <h3>@AssetOrderTr.RequestIsNotApproved</h3>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <h4>@AssetOrderTr.GaveAssest</h4>
+        @if (Model.AreItemGave)
+        {
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.InventoryNumber</div>
+                    <div class="col-md-3">@AssetTr.Brand</div>
+                    <div class="col-md-3">@AssetTr.Model</div>
+                    <div class="col-md-2">@Common.Site</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+
+                @for (int i = 0; i < Model.GivenAssets.Count; i++)
+                {
+                    <div class="panel panel-default row itemRow">
+                        <div class="col-md-2">@Model.GivenAssets[i].Asset.InventoryNumber</div>
+                        <div class="col-md-3">@Model.GivenAssets[i].Asset.Brand</div>
+                        <div class="col-md-3">@Model.GivenAssets[i].Asset.AssetModel</div>
+                        <div class="col-md-2">@Model.GivenAssets[i].Asset.SiteName</div>
+                        <div class="col-md-1">@Model.GivenAssets[i].Asset.Price<span>@(" " + Model.WantAssets[i].Asset.Currency)</span></div>
+                        @Html.HiddenFor(x => Model.GivenAssets[i].Asset.CurrencyCourse)
+                    </div>
+                }
+
+
+                <div class="col-md-offset-10">
+                    <hr />
+                    <h4>@Common.Total: <span id="total"></span> </h4>
+                </div>
+                @if (!Model.Request.IsFinished)
+                {
+                    using (Html.BeginForm("Receive", "AssetOrder", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="id" value="@Model.Request.Id" />
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-1">
+                                <input type="submit" value="@Common.Receive" class="btn btn-primary" />
+                            </div>
+                            <div class="col-md-7">
+                                <a href="/Orders/AssetOrder/RequestForFinishing" class="btn btn-default">@Common.Cancel</a>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <h3>@AssetOrderTr.AssetsAreNotGave</h3>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+<style>
+    .width-50 {
+        width: 50px;
+    }
+</style>
+@section Scripts
+{
+    <script src="~/Areas/Orders/Scripts/AssetOrder/GetRequestForFinishingOrFinishedJS.js"></script>
+}

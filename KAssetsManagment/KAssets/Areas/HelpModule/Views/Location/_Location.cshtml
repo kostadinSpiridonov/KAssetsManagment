@@ -1,0 +1,88 @@
+﻿@model KAssets.Areas.HelpModule.Models.LocationViewModel
+
+<div id="map-canvas"></div>
+
+<style>
+    html, body, #map-canvas {
+        height: 500px;
+        margin: 0px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+
+<script>
+    //Create google map and set the location
+    var geocoder;
+    var map;
+    function codeAddress(address) {
+        geocoder = new google.maps.Geocoder();
+        var lat = '';
+        var lng = '';
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                lat = results[0].geometry.location.lat(); //getting the lat
+                lng = results[0].geometry.location.lng(); //getting the lng
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+        var latlng = new google.maps.LatLng(lat, lng);
+        var myOptions = {
+            zoom: 8,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+    }
+
+    function codeCoordinate(lat, long) {
+        var myLatlng = new google.maps.LatLng(lat, long);
+        var mapOptions = {
+            zoom: 4,
+            center: myLatlng
+        }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Hello World!'
+        });
+    }
+
+    window.onload = function () {
+
+        var latitude = "@Model.Latitude";
+        var longitude = "@Model.Longitude";
+
+        
+
+        var country = "@Model.Country";
+        var town = "@Model.Town";
+        var street = "@Model.Street";
+        var streetNumber = "@Model.StreetNumber";
+
+        if(streetNumber=="0")
+        {
+            streetNumber = "";
+        }
+
+        if(country!=""||street!=""||town!=""||streetNumber!="")
+        {
+            var address = streetNumber + " " + street + " " + town + " " + country;
+            codeAddress(address);
+        }
+
+        if (latitude != "" && longitude != "") {
+            codeCoordinate(parseFloat(latitude), parseFloat(longitude));
+        }
+    }
+
+</script>
+

@@ -1,0 +1,162 @@
+﻿@model KAssets.Areas.Orders.Models.RequestWithSelectedOffersViewModel
+
+@{
+    ViewBag.Title = "Request for approving";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@AssetOrderTr.RequestForApproving</h2>
+<br />
+
+<div>
+    <h4>@AssetOrderTr.Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.DateOfSend)
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.DateOfSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.From)
+        </dt>
+        <dd>
+            @Model.Request.From.FullName
+        </dd>
+        @if (Model.Request.LocationName != null)
+        {
+            <dt>
+                @Html.DisplayName(ItemOrderTr.ForLocation)
+            </dt>
+            <dd>
+                @Model.Request.LocationName
+            </dd>
+        }
+        @if (Model.Request.SiteName != null)
+        {
+            <dt>
+                @Html.DisplayName(ItemOrderTr.ForSite)
+            </dt>
+            <dd>
+                @Model.Request.SiteName
+            </dd>
+        }
+        @if (Model.Request.ForUser != null)
+        {
+            <dt>
+                @Html.DisplayName(ItemOrderTr.ForUser)
+            </dt>
+            <dd>
+                @Model.Request.ForUser
+            </dd>
+        }
+    </dl>
+</div>
+<br />
+
+<hr />
+
+@using (Html.BeginForm("Approve", "ItemOrder"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <h4>@Common.Items</h4>
+
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.Brand</div>
+                    <div class="col-md-2">@AssetTr.Model</div>
+                    <div class="col-md-2">@AssetTr.Producer</div>
+                    <div class="col-md-2">@Common.From</div>
+                    <div class="col-md-1">@ItemOrderTr.RotatingItem</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                    <div class="col-md-2">@Common.Count</div>
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+
+                @for (int i = 0; i < Model.SelectedOffers.Count; i++)
+                {
+                    <div class="panel panel-default row itemRow">
+                        <div class="col-md-2">@Model.SelectedOffers[i].Brand</div>
+                        <div class="col-md-2">@Model.SelectedOffers[i].ItemModel</div>
+                        <div class="col-md-2">@Model.SelectedOffers[i].Producer</div>
+                        <div class="col-md-2">@Model.SelectedOffers[i].MotherName</div>
+                        <div class="col-md-1"><input checked="@Model.SelectedOffers[i].IsRotatingItem" disabled  type="checkbox"/></div>
+                        <div class="col-md-1">@Model.SelectedOffers[i].Price @(" "+Model.SelectedOffers[i].Currency)</div>
+                        <div class="col-md-2">
+                            @Html.EditorFor(x => Model.SelectedOffers[i].SelectedCount, new { htmlAttributes = new { @class = "width-50 count", @min = "0", @max = (Model.SelectedOffers[i].Quantity) } })
+                            (@Model.SelectedOffers[i].Quantity)
+                        </div>                                             
+                        @Html.HiddenFor(x => Model.SelectedOffers[i].Id)
+                        @Html.HiddenFor(x => Model.SelectedOffers[i].CurrencyCourse)
+                    </div>
+                }
+                <div class="col-md-offset-10">
+                    <hr />
+                    <h4>@Common.Total: <span id="total"></span> </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.Request.From.Id)
+    @Html.HiddenFor(x => x.Request.Id)
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-1">
+            <input type="submit" value="@Common.Approve" class="btn btn-primary" />
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-danger" href="/Orders/ItemOrder/Decline/@Model.Request.Id">@Common.Decline</a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-default" href="/Orders/ItemOrder/GetAllRequestsForAproving">@Common.Cancel</a>
+        </div>
+
+    </div>
+}
+
+<style>
+    .width-50 {
+        width: 50px;
+    }
+</style>
+@section Scripts
+{
+    <script>
+
+        $(function () {
+
+            CalcTotal();
+
+            $(".count").bind('input', function () {
+                CalcTotal();
+            });
+            //Calculate the whole sum of all selected items
+            function CalcTotal() {
+                var total = 0.00;
+                var items = $(".itemRow");
+                items.each(function (index, element) {
+                    var price = parseFloat($(this).children().last().prev().prev().prev().html());
+                    var count = parseFloat($(this).children().last().prev().prev().children().first().val());
+                    var course = parseFloat($(this).children().last().val().toString().replace(",", "."));
+                    console.log(price);
+                    total += parseFloat(price * count*course);
+                });
+            
+                //Get the currency of user organisation
+                $.get("/HelpModule/Currency/GetBaseCurrency").done(function (data) {
+                    total = total.toFixed(2);
+                    $("#total").html(total.toString() + " " + data.Notation);
+                });
+            }
+        })
+    </script>
+}

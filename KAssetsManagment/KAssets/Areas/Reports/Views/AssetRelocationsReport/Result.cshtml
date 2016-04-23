@@ -1,0 +1,181 @@
+﻿@model KAssets.Areas.Reports.Models.AssetRelocationsReportResult
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Reports.Result</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>@KAssets.Resources.Translation.AssetsTr.AssetTr.AssetDetails</h3>
+        <hr />
+    </div>
+    <div class="col-md-5">
+        <div class="col-md-12">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.InventoryNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => Model.AssetDetails.InventoryNumber)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Producer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => Model.AssetDetails.Producer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Brand)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => Model.AssetDetails.Brand)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.ItemModel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => Model.AssetDetails.ItemModel)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Guarantee)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => Model.AssetDetails.Guarantee)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Type)
+                </dt>
+
+                <dd>
+                    @Enum.GetName(typeof(KAssets.Models.TypesOfAsset), Model.AssetDetails.Type)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => Model.AssetDetails.Price) @(" " + Model.AssetDetails.Currency)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.SiteName)
+                </dt>
+                <dd>
+                    @Model.AssetDetails.SiteName
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Status)
+                </dt>
+                <dd>
+                    @Model.AssetDetails.Status
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.UserName)
+                </dt>
+                <dd>
+                    @Model.AssetDetails.UserName
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => Model.AssetDetails.Location)
+                </dt>
+                <dd style="height:auto">
+                    @if (Model.AssetDetails.Location != null)
+                    {
+                        <div>
+                            @if (Model.AssetDetails.Location.Country != null)
+                            {
+                                @Model.AssetDetails.Location.Country
+                            }
+                            @if (Model.AssetDetails.Location.Town != null)
+                            {
+                                @Model.AssetDetails.Location.Town
+                            }
+                            @if (Model.AssetDetails.Location.Street != null)
+                            {
+                                @Model.AssetDetails.Location.Street
+                            }
+                            @((Model.AssetDetails.Location.StreetNumber != null && Model.AssetDetails.Location.StreetNumber.Value != 0 ? Model.AssetDetails.Location.StreetNumber.Value.ToString() : ""))
+                            @Model.AssetDetails.Location.Latitude @Model.AssetDetails.Location.Longitude
+                        </div>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br />
+        <h3>@KAssets.Resources.Translation.ReportsArea.Reports.AssetRelocations</h3>
+        <hr />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().FromSite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().ToSite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().FromUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().ToUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().FromLocation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().ToLocation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().DateOfGiven)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.History.FirstOrDefault().DateOfReceived)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.History)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayName(item.FromSite)
+                    </td>
+                    <td>
+                        @Html.DisplayName(item.ToSite)
+                    </td>
+                    <td>
+                        @(item.FromUser != null ? item.FromUser : "-")
+                    </td>
+                    <td>
+                        @(item.ToUser != null ? item.ToUser : "-")
+                    </td>
+                    <td>
+                        @Html.DisplayName(item.FromLocation != null ? item.FromLocation : "-")
+                    </td>
+                    <td>
+                        @Html.DisplayName(item.ToLocation != null ? item.ToLocation : "-")
+                    </td>
+                    <td>
+                        @(item.DateOfGiven != null ? item.DateOfGiven : "-")
+                    </td>
+                    <td>
+                        @(item.DateOfReceived != null ? item.DateOfReceived : "-")
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>

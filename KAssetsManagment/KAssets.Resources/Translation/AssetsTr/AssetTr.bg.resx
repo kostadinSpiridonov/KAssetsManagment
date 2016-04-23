@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddNewAsset" xml:space="preserve">
+    <value>Добавяне на нов актив</value>
+  </data>
+  <data name="AssetDetails" xml:space="preserve">
+    <value>Детайли актив</value>
+  </data>
+  <data name="AssetInfoWasUpdated" xml:space="preserve">
+    <value>Информацията за актива бе актуализирана.</value>
+  </data>
+  <data name="AssetIsNotActive" xml:space="preserve">
+    <value>Статуса на актива не е "Активен".</value>
+  </data>
+  <data name="Assets" xml:space="preserve">
+    <value>Активи</value>
+  </data>
+  <data name="AssetWasAcquired" xml:space="preserve">
+    <value>Активът бе придобит.</value>
+  </data>
+  <data name="AssetWasPartOfOrder" xml:space="preserve">
+    <value>Активът беше част от поръчка на актив. Локацията, сайта или потребителя може да са променени.</value>
+  </data>
+  <data name="AssetWasRelocated" xml:space="preserve">
+    <value>Активът беше преместен.</value>
+  </data>
+  <data name="AssetWasRenovated" xml:space="preserve">
+    <value>Активът беше ремонтиран.</value>
+  </data>
+  <data name="AssetWasScrapped" xml:space="preserve">
+    <value>Активът беше бракуван.</value>
+  </data>
+  <data name="Brand" xml:space="preserve">
+    <value>Марка</value>
+  </data>
+  <data name="BrandIsRequired" xml:space="preserve">
+    <value>Полето "Марка" е задължително.</value>
+  </data>
+  <data name="ChooseLocation" xml:space="preserve">
+    <value>Избери локация</value>
+  </data>
+  <data name="ChooseSite" xml:space="preserve">
+    <value>Избери сайт</value>
+  </data>
+  <data name="ChooseUser" xml:space="preserve">
+    <value>Избери потребител</value>
+  </data>
+  <data name="CurrencyIsRequired" xml:space="preserve">
+    <value>Полето "Валута" е задължително.</value>
+  </data>
+  <data name="DateOfManufacture" xml:space="preserve">
+    <value>Дата на производство</value>
+  </data>
+  <data name="ExistAssetWithIN" xml:space="preserve">
+    <value>Вече съществува актив с този Инвентарен номер.</value>
+  </data>
+  <data name="Guarantee" xml:space="preserve">
+    <value>Гаранция</value>
+  </data>
+  <data name="GuaranteeRangeError" xml:space="preserve">
+    <value>Въведената стойност трябва да е положително число.</value>
+  </data>
+  <data name="InventoryNumber" xml:space="preserve">
+    <value>Инвентарен номер</value>
+  </data>
+  <data name="InventoryNumberIsRequired" xml:space="preserve">
+    <value>Полето "Инвентарен номер" е задължително.</value>
+  </data>
+  <data name="LocationCode" xml:space="preserve">
+    <value>Код локация</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Модел</value>
+  </data>
+  <data name="ModelIsRequired" xml:space="preserve">
+    <value>Полето "Модел" е задължително.</value>
+  </data>
+  <data name="NoSites" xml:space="preserve">
+    <value>Няма налични сайтове.</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="PriceIsRequired" xml:space="preserve">
+    <value>Полето "Цена" е задължително.</value>
+  </data>
+  <data name="PriceRangeError" xml:space="preserve">
+    <value>Въведената стойност трябва да е положително число.</value>
+  </data>
+  <data name="Producer" xml:space="preserve">
+    <value>Производител</value>
+  </data>
+  <data name="ProducerIsRequired" xml:space="preserve">
+    <value>Полето "Производител" е задължително.</value>
+  </data>
+  <data name="SiteIsRequired" xml:space="preserve">
+    <value>Полето "Сайт" е задължително.</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value>Име на сайта</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Вид</value>
+  </data>
+  <data name="TypeIsRequired" xml:space="preserve">
+    <value>Полето "Вид" е задължително.</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>Ид потребител</value>
+  </data>
+</root>

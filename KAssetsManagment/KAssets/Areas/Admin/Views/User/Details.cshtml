@@ -1,0 +1,135 @@
+﻿@model KAssets.Areas.Admin.Models.UserDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<style>
+    dd {
+        height: 1.6em;
+    }
+</style>
+
+<div>
+    <h2>
+        @Common.Details
+        @if (Model.Email != KAssets.Resources.BaseAdmin.Email)
+        {
+            <a href="/Admin/User/Edit/@Model.Id" class="btn btn-primary">@Common.Edit</a>
+        }
+
+    </h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AboutMe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AboutMe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Organisation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organisation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Site)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Site)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityGroups)
+        </dt>
+
+        <dd style="height:auto">
+            @foreach (var item in Model.SecurityGroups)
+            {
+                <div>@item.Name</div>
+            }
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            <div>
+                @if (Model.Location.Country != null)
+                {
+                    @Model.Location.Country
+                }
+                @if (Model.Location.Town != null)
+                {
+                    @Model.Location.Town
+                }
+                @if (Model.Location.Street != null)
+                {
+                    @Model.Location.Street
+                }
+                @((Model.Location.StreetNumber != null && Model.Location.StreetNumber != 0) ? Model.Location.StreetNumber.Value.ToString() : "")
+                @Model.Location.Latitude @Model.Location.Longitude
+            </div>
+            @Html.Partial("~/Areas/HelpModule/Views/Location/_Location.cshtml", @Model.Location)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(@Common.BackToList, "GetAll")
+</p>

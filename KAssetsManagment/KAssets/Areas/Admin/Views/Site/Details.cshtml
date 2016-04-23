@@ -1,0 +1,64 @@
+﻿@model KAssets.Areas.Admin.Models.SiteViewModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name - <a href="/Admin/Organisation/Details/@Model.OrganisationId">@Model.OrganisationName</a></h2>
+
+<div>
+    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+    {
+        <div class="row">
+            <div  class="margin-r-5 margin-l-15 inline-block">
+                <a href="/Admin/Site/Edit/@Model.Id" class="btn btn-primary">@Common.Edit</a>
+            </div>
+            <div class="inline-block">
+                @using (Html.BeginForm("Delete", "Site", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="OrganisationId" value="@Model.OrganisationId" />
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <div>
+                        <input type="submit" class="btn btn-danger" value="@Common.Delete" />
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6 panel panel-default">
+        <div>
+            <h4>@Common.Users</h4>
+        </div>
+        <div id="users" class="min-height">
+            <img src="~/Content/31.gif" alt="Loading..." />
+        </div>
+    </div>
+</div>
+
+<style>
+    .margin-5 {
+        margin: 5px;
+    }
+
+    .min-height {
+        min-height: 60px;
+    }
+</style>
+@section Scripts
+{
+    <script>
+        //Get users for site
+        $.ajax({
+            method: "GET",
+            url: "/Admin/UserSite/GetUsersForSite/@Model.Id",
+            success: function (data) {
+                $("#users").html(data);
+            }
+        })
+    </script>
+}

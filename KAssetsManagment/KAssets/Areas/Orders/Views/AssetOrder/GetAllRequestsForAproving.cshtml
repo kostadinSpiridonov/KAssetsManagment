@@ -1,0 +1,38 @@
+﻿@model List<KAssets.Areas.Orders.Models.ListAssetRequestViewModel>
+@{
+    ViewBag.Title = "Requests for approving";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@AssetOrderTr.RequestsForApproving</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DateOfSend)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.From.FullName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfSend)
+            </td>
+            <td>
+                <a class="btn btn-primary" href="/Orders/AssetOrder/RequestForApproving/@item.Id">@Common.View</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@if(Model.Count==0)
+{
+    <h4>@AssetOrderTr.NoRequestsForApproving</h4>
+}

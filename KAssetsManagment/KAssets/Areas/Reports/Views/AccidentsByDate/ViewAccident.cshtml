@@ -1,0 +1,46 @@
+﻿@model KAssets.Areas.HelpModule.Models.ViewAccidentViewModel
+
+@{
+    ViewBag.Title = "Accident";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Reports.ViewAcc</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSend)
+        </dd>
+        @if (Model.DateOfRaply != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfRaply)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfRaply)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+    </dl>
+</div>

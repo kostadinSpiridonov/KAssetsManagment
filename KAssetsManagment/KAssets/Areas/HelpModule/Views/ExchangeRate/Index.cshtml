@@ -1,0 +1,58 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.ExchangeRateViewModel>
+
+@{
+    ViewBag.Title = "Exchange retes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNet.Identity
+
+<h2>@ExchangeRateTr.ExchangeRates</h2>
+
+<p>
+    @Html.ActionLink(ExchangeRateTr.NewExchangeRate, "Add", null, new { @class="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.First().Organisation)
+            </th>
+        }
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.From)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.To)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Organisation)
+            </td>
+        }
+        <td>
+            @Html.ActionLink(Common.Edit, "Edit", new { id = item.Id }, new { @class="btn btn-default"}) 
+        </td>
+    </tr>
+}
+
+</table>

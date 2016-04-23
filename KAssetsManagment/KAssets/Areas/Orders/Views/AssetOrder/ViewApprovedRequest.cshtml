@@ -1,0 +1,133 @@
+﻿@model KAssets.Areas.Orders.Models.BaseRequestForAssetViewModel
+@{
+    ViewBag.Title = "Approed request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@AssetOrderTr.ApprovedRequest</h2>
+<br />
+
+<div>
+    <h4>@AssetOrderTr.Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.DateOfSend)
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.DateOfSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.From)
+        </dt>
+        <dd>
+            @Model.Request.From.FullName
+        </dd>
+    </dl>
+</div>
+<br />
+
+<hr />
+
+@using (Html.BeginForm("GiveItems", "AssetOrder"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <h4>@AssetOrderTr.WantAssets</h4>
+
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.InventoryNumber</div>
+                    <div class="col-md-3">@AssetTr.Brand</div>
+                    <div class="col-md-3">@AssetTr.Model</div>
+                    <div class="col-md-2">@Common.Site</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+
+                @for (int i = 0; i < Model.WantAssets.Count; i++)
+                {
+                    <div class="panel panel-default row ">
+                        <div class="col-md-2">@Model.WantAssets[i].Asset.InventoryNumber</div>
+                        <div class="col-md-3">@Model.WantAssets[i].Asset.Brand</div>
+                        <div class="col-md-3">@Model.WantAssets[i].Asset.AssetModel</div>
+                        <div class="col-md-2">@Model.WantAssets[i].Asset.SiteName</div>
+                        <div class="col-md-1">@Model.WantAssets[i].Asset.Price<span>@(" " + Model.WantAssets[i].Asset.Currency)</span></div>
+                        <div class="col-md-1">
+                        </div>
+                        @Html.HiddenFor(x => Model.WantAssets[i].Asset.InventoryNumber)
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <h4>@AssetOrderTr.ApprovedAssets</h4>
+
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.InventoryNumber</div>
+                    <div class="col-md-3">@AssetTr.Brand</div>
+                    <div class="col-md-3">@AssetTr.Model</div>
+                    <div class="col-md-2">@Common.Site</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+
+                @for (int i = 0; i < Model.ApprovedAssets.Count; i++)
+                {
+                    <div class="panel panel-default row itemRow">
+                        <div class="col-md-2">@Model.ApprovedAssets[i].Asset.InventoryNumber</div>
+                        <div class="col-md-3">@Model.ApprovedAssets[i].Asset.Brand</div>
+                        <div class="col-md-3">@Model.ApprovedAssets[i].Asset.AssetModel</div>
+                        <div class="col-md-2">@Model.ApprovedAssets[i].Asset.SiteName</div>
+                        <div class="col-md-1">@Model.ApprovedAssets[i].Asset.Price<span>@(" " + Model.WantAssets[i].Asset.Currency)</span></div>
+                        <div class="col-md-1">
+                            @Html.CheckBoxFor(x => Model.GivenAssets[i].Selected, new { @class = "count" })
+                        </div>
+                        @Html.HiddenFor(x => Model.GivenAssets[i].Asset.InventoryNumber)
+                        @Html.HiddenFor(x => Model.ApprovedAssets[i].Asset.CurrencyCourse)
+                    </div>
+                }
+                <div class="col-md-offset-10">
+                    <hr />
+                    <h4>@Common.Total: <span id="total"></span> </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.Request.From.Id)
+    @Html.HiddenFor(x => x.Request.Id)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-2 ">
+            <input type="submit" value="@AssetOrderTr.GiveAssets" class="btn btn-primary float-right" />
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-danger float-right" href="/Orders/AssetOrder/NotGave/@Model.Request.Id">@Common.Decline</a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-default" href="/Orders/AssetOrder/ViewApprovedRequests">@Common.Cancel</a>
+        </div>
+
+    </div>
+}
+
+<style>
+    .width-50 {
+        width: 50px;
+    }
+</style>
+@section Scripts
+{
+    <script src="~/Areas/Orders/Scripts/AssetOrder/RequestForApproving.js"></script>
+}
+

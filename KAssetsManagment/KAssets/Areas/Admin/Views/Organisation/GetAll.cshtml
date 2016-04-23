@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KAssets.Areas.Admin.Models.OrganisationViewModel>
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Organisations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@OrganisationTr.Organisations</h2>
+@if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+{
+    <p>
+        <a href="/Admin/Organisation/Add" class="btn btn-primary">@OrganisationTr.AddOrganisation</a>
+    </p>
+}
+
+<table class="table">
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <h4>  @Html.ActionLink(item.Name, "Details", new { id = item.Id }, new { area = "Admin" })</h4>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,123 @@
+﻿@model KAssets.Areas.Admin.Models.OrganisationViewModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 >@Html.DisplayFor(model => model.Name) </h2>
+<h5 style ="margin-left:20px">  @Html.DisplayFor(model => model.Address)</h5>
+
+@if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+{
+    <div class="row">
+        <div class="inline-block margin-r-5 margin-l-15">
+            <a class="btn btn-primary" href="/Admin/Organisation/Edit/@Model.Id"> @Common.Edit</a>
+        </div>
+        <div class="inline-block">
+            <div>
+                @using (Html.BeginForm("Delete", "Organisation", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <div>
+                        <input type="submit" class="btn btn-danger" value="@Common.Delete" />
+                        <span style="color:red; font-size:20px">
+                            @TempData["DelError"]
+                        </span>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+}
+<hr />
+
+<div class="row">
+    <div class="col-md-6 panel panel-default">
+        <div>
+            <div>
+                <h4>@SiteTr.Sites</h4>
+            </div>
+            <div id="sites" class="min-height">
+                <img src="~/Content/31.gif" alt="Loading..." />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 panel panel-default">
+        <div>
+            <div>
+                <h4>@BillTr.Bill</h4>
+            </div>
+            <div id="bill" class="margin-5 min-height">
+                <img src="~/Content/31.gif" alt="Loading..." />
+            </div>
+            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+            {
+                <div id="addBill" class="margin-5 min-height">
+                    <img src="~/Content/31.gif" alt="Loading..." />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .margin-5 {
+        margin: 5px;
+    }
+    .min-height{
+        min-height:60px;
+    }
+</style>
+
+@Html.ActionLink(Common.BackToList, "GetAll")
+@section Scripts{
+
+    <script>
+        //Get all sites and put them in div
+        $.ajax({
+            method: "GET",
+            url: "/Admin/Site/GetAll/@Model.Id",
+            success: function (data) {
+                $("#sites").html(data);
+            }
+        })
+
+        //Check if organisation has bill
+        $.ajax({
+            method: "GET",
+            url: "/Bill/HasOrganisationBill/@Model.Id",
+            success: function (data) {
+                if (data == "True") {
+                    ShowBill();
+                }
+                else {
+                    AddBill();
+                }
+            }
+        })
+
+        // Show add bil div
+        function AddBill() {
+            $("#addBill").html('<div> <a class="btn btn-primary" href="/Bill/Add/@Model.Id">@BillTr.AddBill</a> </div>');
+
+            $("#bill").html("");
+            $("#bill").css("min-height","0");
+
+        }
+        //Show show bill window
+        function ShowBill() {
+            $.ajax({
+                method: "GET",
+                url: "/Bill/GetBill/@Model.Id",
+                success: function (data) {
+                    $("#bill").html(data);
+                    $("#addBill").html("");
+                    $("#addBill").css("min-height", "0");
+                }
+            })
+        }
+    </script>
+}

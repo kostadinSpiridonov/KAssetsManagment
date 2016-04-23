@@ -1,0 +1,142 @@
+﻿@model KAssets.Areas.Orders.Models.RequestToProviderFullViewModel
+@{
+    ViewBag.Title = "History request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style>
+    .padding-top-0 {
+        padding-top: 0px !important;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+</style>
+<h2>@ProviderOrderTr.ViewHistoryRequest</h2>
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProviderEmail, htmlAttributes: new { @class = "control-label col-md-2 padding-top-0" })
+        <div class="col-md-10 vertical-centered">
+            @Html.DisplayFor(model => model.ProviderEmail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProviderEmail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FromName, htmlAttributes: new { @class = "control-label col-md-2 padding-top-0" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.FromName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FromName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfSend, htmlAttributes: new { @class = "control-label col-md-2 padding-top-0" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.DateOfSend, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DateOfSend, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <h3>@ProviderOrderTr.WantItems</h3>
+    <div class="row bold">
+        <div class="col-md-3">@AssetTr.Brand</div>
+        <div class="col-md-3">@AssetTr.Model</div>
+        <div class="col-md-3">@AssetTr.Producer</div>
+        <div class="col-md-1">@ItemTr.Quantity</div>
+        <div class="col-md-1"></div>
+    </div>
+    <hr />
+    @for (int i = 0; i < Model.WantItems.Count; i++)
+    {
+        <div class="row offer">
+            <div class="col-md-3">@Model.WantItems[i].Brand </div>
+            <div class="col-md-3">@Model.WantItems[i].ItemModel</div>
+            <div class="col-md-3">@Model.WantItems[i].Producer</div>
+            <div class="col-md-1">@Model.WantItems[i].Quantity</div>
+            <div class="col-md-1">
+            </div>
+        </div>
+        <br />
+    }
+    <br />
+    <h3>@ProviderOrderTr.Offers</h3>
+    <div class="row bold">
+        <div class="col-md-3">@AssetTr.Brand</div>
+        <div class="col-md-3">@AssetTr.Model</div>
+        <div class="col-md-3">@AssetTr.Producer</div>
+        <div class="col-md-1">@ItemTr.Quantity</div>
+        <div class="col-md-1">@AssetTr.Producer</div>
+        <div class="col-md-1"></div>
+    </div>
+    <hr />
+    @for (int i = 0; i < Model.Offers.Count; i++)
+    {
+        <div class="row offer">
+            <div class="col-md-3">@Model.Offers[i].Brand </div>
+            <div class="col-md-3">@Model.Offers[i].ItemModel</div>
+            <div class="col-md-3">@Model.Offers[i].Producer</div>
+            <div class="col-md-1">@Model.Offers[i].Quantity</div>
+            <div class="col-md-1">@Model.Offers[i].Price @(" " + @Model.Offers[i].CurrencyNotaion)</div>
+            <div class="col-md-1">
+            </div>
+        </div>
+        <br />
+    }
+    <br />
+    <h3>@ProviderOrderTr.ApprovedOffers</h3>
+    <div class="row bold">
+        <div class="col-md-3">@AssetTr.Brand</div>
+        <div class="col-md-3">@AssetTr.Model</div>
+        <div class="col-md-3">@AssetTr.Producer</div>
+        <div class="col-md-1">@ItemTr.Quantity</div>
+        <div class="col-md-1">@AssetTr.Producer</div>
+        <div class="col-md-1"></div>
+    </div>
+    <hr />
+    @for (int i = 0; i < Model.Offers.Count; i++)
+    {
+        if (Model.Offers[i].IsSelected)
+        {
+            <div class="row offer">
+                <div class="col-md-3">@Model.Offers[i].Brand </div>
+                <div class="col-md-3">@Model.Offers[i].ItemModel</div>
+                <div class="col-md-3">@Model.Offers[i].Producer</div>
+                <div class="col-md-1">@Model.Offers[i].Quantity</div>
+                <div class="col-md-1">@Model.Offers[i].Price @(" " + @Model.Offers[i].CurrencyNotaion)</div>
+                <div class="col-md-1">
+                </div>
+            </div>
+            <br />
+        }
+    }
+    <br />
+    <h3>@ProviderOrderTr.GiveItems</h3>
+    <div class="row bold">
+        <div class="col-md-3">@AssetTr.Brand</div>
+        <div class="col-md-3">@AssetTr.Model</div>
+        <div class="col-md-3">@AssetTr.Producer</div>
+        <div class="col-md-1">@ItemTr.Quantity</div>
+        <div class="col-md-1">@AssetTr.Producer</div>
+        <div class="col-md-1"></div>
+    </div>
+    <hr />
+    @for (int i = 0; i < Model.GiveItems.Count; i++)
+    {
+            <div class="row offer">
+                <div class="col-md-3">@Model.GiveItems[i].Brand </div>
+                <div class="col-md-3">@Model.GiveItems[i].ItemModel</div>
+                <div class="col-md-3">@Model.GiveItems[i].Producer</div>
+                <div class="col-md-1">@Model.GiveItems[i].Quantity</div>
+                <div class="col-md-1">@Model.GiveItems[i].Price @(" " + @Model.Offers[i].CurrencyNotaion)</div>
+                <div class="col-md-1">
+                </div>
+            </div>
+            <br />
+    }
+</div>

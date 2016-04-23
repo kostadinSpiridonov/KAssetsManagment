@@ -1,0 +1,54 @@
+﻿@model KAssets.Areas.HelpModule.Models.ViewAccidentViewModel
+
+@{
+    ViewBag.Title = "Accident answer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href="/HelpModule/Accident/GetAnswers" class="btn btn-primary">@Common.Back</a>
+<h2>@AccidentTr.ViewAccAnswer</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfRaply)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfRaply)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+
+    </dl>
+</div>

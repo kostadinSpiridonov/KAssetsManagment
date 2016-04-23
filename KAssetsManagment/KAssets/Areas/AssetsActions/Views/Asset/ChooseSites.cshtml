@@ -1,0 +1,40 @@
+﻿
+@model KAssets.Areas.Admin.Models.ShowSitesViewModel
+@using Microsoft.AspNet.Identity
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchBySite">
+            <option value="Name">
+                @Html.DisplayNameFor(model => model.Sites.First().Name)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline width-250px" id="searchValueSite" />
+    </div>
+</div>
+<br />
+<div class="tableOuter">
+    <table class="table">
+
+
+        @foreach (var item in Model.Sites)
+        {
+            <tr>
+                <td class="name">
+                    @item.Name
+                </td>
+                <td>
+                    <button class="site btn btn-default" id="@item.Id">@Common.Choose</button>
+                </td>
+            </tr>
+        }
+
+        @if (Model.Sites.Count == 0)
+        {
+            <tr><td><h4>@AssetTr.NoSites</h4></td></tr>
+        }
+
+    </table>
+</div>

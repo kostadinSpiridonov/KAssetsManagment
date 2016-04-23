@@ -1,0 +1,68 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.ProviderDetailsViewModel>
+
+
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchByProvider">
+            <option value="Id">
+                @Html.DisplayNameFor(model => model.First().Id)
+            </option>
+            <option value="Name">
+                @Html.DisplayNameFor(model => model.First().Name)
+            </option>
+            <option value="Email">
+                @Html.DisplayNameFor(model => model.First().Email)
+            </option>
+            <option value="Phone">
+                @Html.DisplayNameFor(model => model.First().Phone)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline width-250px" id="searchValueProvider" />
+    </div>
+</div>
+<br />
+
+<div class="tableOuter">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Phone)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="id">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="name">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="email">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class="phone">
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <button class="provider btn btn-default" id="@item.Id">@Common.Choose</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

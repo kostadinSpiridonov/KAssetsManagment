@@ -1,0 +1,73 @@
+﻿@model IEnumerable<KAssets.Areas.AssetsActions.Models.AssetViewModel>
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchBy">
+            <option value="Inventory number">
+                @Html.DisplayNameFor(model => model.First().InventoryNumber)
+            </option>
+            <option value="Brand">
+                @Html.DisplayNameFor(model => model.First().Brand)
+            </option>
+            <option value="Model">
+                @Html.DisplayNameFor(model => model.First().AssetModel)
+            </option>
+            <option value="Site name">
+                @Html.DisplayNameFor(model => model.First().SiteName)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline width-250px" id="searchValue" />
+    </div>
+</div>
+<br />
+
+<div class="tableOuter">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="inventoryNumber">
+                    @Html.DisplayFor(modelItem => item.InventoryNumber)
+                </td>
+                <td class="brand">
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td class="model">
+                    @Html.DisplayFor(modelItem => item.AssetModel)
+                </td>
+                <td class="site">
+                    @Html.DisplayFor(modelItem => item.SiteName)
+                </td>
+                <td>
+                    <input type="checkbox" value="Choose" class="asset" id="@item.InventoryNumber" />
+
+                    <input type="hidden" value="@item.Price" />
+                    <input type="hidden" value="@item.Currency" />
+                    <input type="hidden" value="@item.CurrencyCourse" />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="row">
+    <button class="btn btn-default col-md-offset-4 col-md-2" id="chooseBtn">@Common.Choose</button>
+</div>

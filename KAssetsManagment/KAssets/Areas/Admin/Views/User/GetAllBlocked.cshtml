@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<KAssets.Areas.Admin.Models.UserViewModel>
+@{
+    ViewBag.Title = "Blocked users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Admin.BlockedUsers</h2>
+
+
+@foreach (var item in Model)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-9 col-xs-8">
+            @if (item.FirstName != null && item.SecondName != null && item.LastName != null)
+            {
+                <a href="/Admin/User/Details/@item.Id">
+                    <h4>  @item.FirstName @item.SecondName @item.LastName</h4>
+                </a>
+            }
+            else
+            {
+                <a href="/Admin/User/Details/@item.Id">
+                    <h4>   @item.Email</h4>
+                </a>
+            }
+        </div>
+        <div class="col-md-1 col-xs-1">
+            @if (item.Email != KAssets.Resources.BaseAdmin.Email)
+            {
+                <a href="/Admin/User/Edit/@item.Id" class="btn btn-primary float-right">@Common.Edit</a>
+            }
+        </div>
+        <div class="col-md-2 col-xs-3">
+            @if (item.Email != KAssets.Resources.BaseAdmin.Email)
+            {
+                using (Html.BeginForm("UnBlock", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <div>
+                        <input type="submit" class="btn btn-danger" value="@Admin.Unblock" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+<hr />
+@if(Model.Count()==0)
+{
+    <h3>@Admin.NoBlUsers</h3>
+}

@@ -1,0 +1,298 @@
+﻿@model KAssets.Areas.Orders.Models.RequestWithSelectedOffersViewModel
+
+@{
+    if (Model.Request.IsFinished)
+    {
+        ViewBag.Title = "Finished request";
+    }
+    else
+    {
+        ViewBag.Title = "Request for finishing";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Request.IsFinished)
+{
+
+    <h2>@ItemOrderTr.FinishedRequestIO</h2>
+}
+else
+{
+    <h2>@ItemOrderTr.RequestForFinishingIO</h2>
+}
+<br />
+
+<div>
+    <h4>@AssetOrderTr.Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.DateOfSend)
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.DateOfSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.From)
+        </dt>
+        <dd>
+            @Model.Request.From.FullName
+        </dd>
+        @if (Model.Request.LocationName != null)
+        {
+            <dt>
+                @Html.DisplayName(ItemOrderTr.ForLocation)
+            </dt>
+            <dd>
+                @Model.Request.LocationName
+            </dd>
+        }
+        @if (Model.Request.SiteName != null)
+        {
+            <dt>
+                @Html.DisplayName(ItemOrderTr.ForSite)
+            </dt>
+            <dd>
+                @Model.Request.SiteName
+            </dd>
+        }
+        @if (Model.Request.ForUser != null)
+        {
+            <dt>
+                @Html.DisplayName(ItemOrderTr.ForUser)
+            </dt>
+            <dd>
+                @Model.Request.ForUser
+            </dd>
+        }
+    </dl>
+</div>
+<br />
+@if (Model.Request.PackingSlipId != 0 && Model.Request.IsFinished)
+{
+    <hr />
+    <div>
+        @{Html.RenderAction("GetPartialDetails", "PackingSlip", new { id = @Model.Request.PackingSlipId, area = "" });}
+    </div>
+    <br />
+}
+
+<hr />
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <h4>@ItemOrderTr.WantItems</h4>
+
+        <div class="col-md-12">
+            <div class="dt-horizontal" style="font-weight:bold">
+                <div class="col-md-2">@AssetTr.Brand</div>
+                <div class="col-md-2">@AssetTr.Model</div>
+                <div class="col-md-2">@AssetTr.Producer</div>
+                <div class="col-md-2">@Common.From</div>
+                <div class="col-md-1">@ItemOrderTr.RotatingItem</div>
+                <div class="col-md-1">@AssetTr.Price</div>
+                <div class="col-md-1">@Common.Count</div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+
+            @for (int i = 0; i < Model.SelectedOffers.Count; i++)
+            {
+                <div class="panel panel-default row">
+                    <div class="col-md-2">@Model.SelectedOffers[i].Brand</div>
+                    <div class="col-md-2">@Model.SelectedOffers[i].ItemModel</div>
+                    <div class="col-md-2">@Model.SelectedOffers[i].Producer</div>
+                    <div class="col-md-2">@Model.SelectedOffers[i].MotherName</div>
+                    <div class="col-md-1">
+                        <input disabled type="checkbox" checked="@Model.SelectedOffers[i].IsRotatingItem" />
+                    </div>
+                    <div class="col-md-1">@Model.SelectedOffers[i].Price @(" " + Model.SelectedOffers[i].Currency)</div>
+                    <div class="col-md-1">@Model.SelectedOffers[i].SelectedCount</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <h4>@ItemOrderTr.ApprovedItems</h4>
+        @if (Model.IsApproved)
+        {
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.Brand</div>
+                    <div class="col-md-2">@AssetTr.Model</div>
+                    <div class="col-md-2">@AssetTr.Producer</div>
+                    <div class="col-md-2">@Common.From</div>
+                    <div class="col-md-1">@ItemOrderTr.RotatingItem</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                    <div class="col-md-1">@Common.Count</div>
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+
+                @for (int i = 0; i < Model.ApprovedOffers.Count; i++)
+                {
+                    <div class="panel panel-default row">
+                        <div class="col-md-2">@Model.ApprovedOffers[i].Brand</div>
+                        <div class="col-md-2">@Model.ApprovedOffers[i].ItemModel</div>
+                        <div class="col-md-2">@Model.ApprovedOffers[i].Producer</div>
+                        <div class="col-md-2">@Model.ApprovedOffers[i].MotherName</div>
+                        <div class="col-md-1">
+                            <input disabled checked="@Model.ApprovedOffers[i].IsRotatingItem" type="checkbox" />
+                        </div>
+                        <div class="col-md-1">@Model.ApprovedOffers[i].Price @(" " + Model.SelectedOffers[i].Currency)</div>
+                        <div class="col-md-1">@Model.ApprovedOffers[i].SelectedCount</div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <h2>@ItemOrderTr.RequestIsNotApproved</h2>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <h4>@ItemOrderTr.GaveItems</h4>
+        @if (Model.AreItemGave)
+        {
+            <div class="col-md-12">
+                <div class="dt-horizontal" style="font-weight:bold">
+                    <div class="col-md-2">@AssetTr.Brand</div>
+                    <div class="col-md-2">@AssetTr.Model</div>
+                    <div class="col-md-2">@AssetTr.Producer</div>
+                    <div class="col-md-2">@Common.From</div>
+                    <div class="col-md-1">@ItemOrderTr.RotatingItem</div>
+                    <div class="col-md-1">@AssetTr.Price</div>
+                    <div class="col-md-1">@Common.Count</div>
+                    @if (!Model.Request.IsFinished)
+                    {
+                        <div class="col-md-1">@ItemOrderTr.CreateAsset</div>
+                    }
+                </div>
+                <div class="row">
+                    <hr />
+                </div>
+                @using (Html.BeginForm("CreateAssetsFromItemOrder", "Asset", new { area = "AssetsActions" }, FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+
+                    for (int i = 0; i < Model.GaveItems.Count; i++)
+                    {
+                        <div class="panel panel-default row itemRow">
+                            <div class="col-md-2">@Model.GaveItems[i].Brand</div>
+                            <div class="col-md-2">@Model.GaveItems[i].ItemModel</div>
+                            <div class="col-md-2">@Model.GaveItems[i].Producer</div>
+                            <div class="col-md-2">@Model.GaveItems[i].MotherName</div>
+                            <div class="col-md-1">
+                                <input disabled type="checkbox" checked="@Model.SelectedOffers[i].IsRotatingItem" />
+                            </div>
+                            <div class="col-md-1 price">@Model.GaveItems[i].Price @(" " + Model.SelectedOffers[i].Currency)</div>
+                            <div class="col-md-1 count">@Model.GaveItems[i].SelectedCount</div>
+                            @if (!Model.Request.IsFinished)
+                            {
+                                <div class="col-md-1">
+                                    @if (Model.GaveItems[i].IsRotatingItem && Model.GaveItems[i].SelectedCount > 0)
+                                    {
+                                        @Html.CheckBoxFor(x => Model.GaveItems[i].CreateAsset)
+                                    }
+                                    else
+                                    {
+                                        @Html.CheckBoxFor(x => Model.GaveItems[i].CreateAsset, new { @disabled = "disabled" })
+                                    }
+                                    @Html.HiddenFor(x => Model.GaveItems[i].Id)
+                                </div>
+                            }
+                            @Html.HiddenFor(x => Model.GaveItems[i].CurrencyCourse)
+                        </div>
+                    }
+                    <div class="col-md-offset-10">
+                        <hr />
+                        <h4>@Common.Total: <span id="total"></span> </h4>
+                    </div>
+                    <p>
+                        <h3>
+                            @if (!Model.Request.IsFinished)
+                            {
+                                @Model.Message
+                            }
+                        </h3>
+                    </p>
+                    if (!Model.Request.IsFinished)
+                    {
+
+                        @Html.HiddenFor(x => x.Request.Id)
+                        @Html.HiddenFor(x => x.Request.PackingSlipId)
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-1">
+                                <input type="submit" value="@Common.Receive" class="btn btn-primary" />
+                            </div>
+                            <div class="col-md-7">
+                                <a href="/Orders/ItemOrder/RequestForFinishing" class="btn btn-default">@Common.Cancel</a>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <h2>@ItemOrderTr.ItemsAreNotGave</h2>
+        }
+    </div>
+
+</div>
+
+
+
+
+<style>
+    .width-50 {
+        width: 50px;
+    }
+</style>
+@section Scripts
+{
+    <script>
+
+        $(function () {
+
+            CalcTotal();
+
+            //Calculate the whole sum of all selected items
+            function CalcTotal() {
+                var total = 0.00;
+                var items = $(".itemRow");
+                items.each(function (index, element) {
+                    var price = parseFloat($(this).children(".price").html());
+                    var count = parseFloat($(this).children(".count").html());
+                    var course = parseFloat($(this).children().last().val().toString().replace(",", "."));
+                    total += parseFloat(price * count * course);
+                });
+
+                //Get the currency of user organisation
+                $.get("/HelpModule/Currency/GetBaseCurrency").done(function (data) {
+                    total = total.toFixed(2);
+                    $("#total").html(total.toString() + " " + data.Notation);
+                });
+            }
+        })
+    </script>
+}

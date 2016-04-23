@@ -1,0 +1,45 @@
+﻿@model KAssets.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron background-white">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Content/gear.png" />
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-8">
+
+                    <h2>@KAssets.Resources.Translation.AccountTr.AccountTr.WelcomeTo</h2>
+                    <h2>KAssets Management</h2>
+                </div>
+                <ul class="nav navbar-nav" style="height:50px; padding-top:7px; margin-top:12px">
+                    <li>
+                        <button type="submit" style="border: 0; background: transparent" value="En" class="tr">
+                            <img src="~/Content/United-Kingdom-Flag-1-icon.png" width="35" height="31" alt="submit" style="margin-top:2px" />
+                        </button>
+                    </li>
+                    <li>
+                        <button type="submit" style="border: 0; background: transparent" value="Bg" class="tr">
+                            <img src="~/Content/Bulgaria-icon.png" width="35" height="35" alt="submit" />
+                        </button>
+                    </li>
+                </ul>
+
+            </div>
+            <div id="login">
+                @Html.Partial("~/Views/Account/_Login.cshtml", @Model)
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .background-white {
+        background-color: transparent;
+        text-align: left;
+        color: white;
+    }
+</style>

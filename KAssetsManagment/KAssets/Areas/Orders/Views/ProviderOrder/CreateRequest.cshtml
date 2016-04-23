@@ -1,0 +1,111 @@
+﻿@model KAssets.Areas.Orders.Models.CreateProviderRequestViewModel
+@{
+    ViewBag.Title = "Send request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/styles.css" rel="stylesheet" />
+
+<style>
+    .font-weight-bold {
+        font-weight: bold;
+    }
+</style>
+<div id="items" class="hidden" title="@ItemOrderTr.ChooseItems">
+</div>
+
+<h2>@ProviderOrderTr.SendRequestToProvider</h2>
+
+<div id="providers" class="hidden" title="@InvoiceTr.ChooseProvider">
+</div>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Provider, new { @class = "col-md-2 control-label" })
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Provider, new { @class = "form-control", readOnly = "readOnly" })
+                    <a class="btn btn-sm btn-danger clearProvider">@Common.Clear</a>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Provider, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.ActionLink(Common.Choose, "#", null, new { @class = "chooseProvider btn btn-default" })
+                </div>
+            </div>
+            <br />
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>@Common.Items</h4>
+                    <br />
+                    <div class="col-md-3">
+                        @Html.Label(ProviderOrderTr.SelectItems, new { @class = "control-label" })
+                        <br />
+                        <input type="button" class="btn btn-default chooseItems" value="@Common.Choose" />
+                        <br />
+                        @Html.ValidationMessageFor(m => m.ItemsAndCount, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row font-weight-bold">
+                            <div class="col-md-3">@AssetTr.Brand</div>
+                            <div class="col-md-3">@AssetTr.Model</div>
+                            <div class="col-md-3">@Common.Organisation</div>
+                            <div class="col-md-1">@Common.Count</div>
+                            <hr />
+                        </div>
+                        <div id="selectedItems">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.Label(ProviderOrderTr.Subject, new { @class = "col-md-12 control-label" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(x => x.Subject, new { @class = "form-control", style = "width:100%; min-width:100%; min-height:30px; height:35px" })
+                    @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.Label(Common.Content, new { @class = "col-md-12 control-label" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(x => x.Content, new { @class = "form-control", style = "width:100%; min-width:100%; min-height:250px" })
+                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-2">
+                    <input type="submit" value="@Common.SendRequest" class="btn btn-default" />
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btn-default" href="/Home/Index">@Common.Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/Areas/Orders/Scripts/ProviderOrder/CreateRequestJS.js"></script>
+}

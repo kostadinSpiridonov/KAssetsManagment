@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.ListAccidentViewModel>
+
+@{
+    ViewBag.Title = "Answers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .notSeen{
+        background-color:#c8e6fc;
+        margin:2px;
+        border-radius:5px;
+        border:1px solid #a2d8ff;
+    }
+</style>
+<h2>@AccidentTr.AccidentsWithAnswer</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayName(KAssets.Resources.Translation.ReportsArea.Reports.DateOfSend)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.IsSeen)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink(Common.View, "ViewAccidentWithAnswer", new { id = item.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr class="notSeen">
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink(@Common.View, "ViewAccidentWithAnswer", new { id = item.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+@if(Model.Count()==0)
+{
+    <h4>@AccidentTr.NoAnswers</h4>
+}

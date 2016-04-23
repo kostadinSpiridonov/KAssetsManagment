@@ -1,0 +1,29 @@
+﻿@model KAssets.Areas.Admin.Models.ShowSitesViewModel
+@using Microsoft.AspNet.Identity
+
+<table class="table">
+
+
+    @foreach (var item in Model.Sites)
+    {
+        <tr>
+            <td>
+                <a href="/Admin//Site/Details/@item.Id"> @item.Name</a>
+            </td>
+        </tr>
+
+    }
+    @if (Model.Sites.Count == 0)
+    {
+        <tr><td><h4>@SiteTr.NoSites</h4></td></tr>
+    }
+
+    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+    {
+        <tr>
+            <td>
+                <a class="btn btn-primary" href="/Admin/Site/Add/@Model.OrganisationId"> @Common.Add</a>
+            </td>
+        </tr>
+    }
+</table>

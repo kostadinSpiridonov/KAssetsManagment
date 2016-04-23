@@ -1,0 +1,100 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.ProviderViewModel>
+
+@{
+    ViewBag.Title = "Providers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+<style>
+    .display-inline {
+        display: inline;
+    }
+
+    .display-inline {
+        display: inline;
+    }
+
+    .width-170px {
+        width: 170px;
+    }
+
+    .text-h-center {
+        vertical-align: central;
+    }
+</style>
+
+<h2>@ProviderTr.Providers</h2>
+<p>
+    @Html.ActionLink(ProviderTr.AddProvider, "Add", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink(ProviderTr.DeletedProviders, "GetAllDeleted", null, new { @class = "btn btn-primary" })
+</p>
+
+<br />
+<div class="row">
+    <div class="col-md-1 text-h-center">
+        <h5>@Common.Search</h5>
+    </div>
+    <select class="form-control display-inline width-170px" id="searchBy">
+        <option value="Name">
+            @Html.DisplayNameFor(model => model.First().Name)
+        </option>
+        <option value="Email">
+            @Html.DisplayNameFor(model => model.First().Email)
+        </option>
+    </select>
+    <input type="text" class="form-control display-inline" id="searchValue" />
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.First().Organisation)
+            </th>
+        }
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="name">
+                <a href="/HelpModule/Provider/Details/@item.Id"> @Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td class="email">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Admin right", User.Identity.GetUserId()))
+            {
+                <td>
+                    @Html.DisplayFor(model => item.Organisation)
+                </td>
+            }
+            <td>
+                @Html.ActionLink(Common.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+                @using (Html.BeginForm("Delete", "Provider", new { id = item.Id }, FormMethod.Post, new { @class = "display-inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="@Common.Delete" class="btn btn-danger" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Count() == 0)
+{
+    <h4> @ProviderTr.NoProviders</h4>
+}
+@section Scripts
+{
+    <script src="~/Areas/HelpModule/Scripts/Provider/GetAllJS.js"></script>
+}

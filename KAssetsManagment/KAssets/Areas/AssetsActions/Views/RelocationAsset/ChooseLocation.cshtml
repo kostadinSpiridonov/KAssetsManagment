@@ -1,0 +1,92 @@
+﻿@model IEnumerable<KAssets.Areas.HelpModule.Models.LocationViewModel>
+
+<link href="~/Content/CssKAssets/ChooseWindow.css" rel="stylesheet" />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <select class="form-control display-inline width-170px" id="searchByLocation">
+            <option value="Code">
+                @Html.DisplayNameFor(model => model.First().Code)
+            </option>
+            <option value="Country">
+                @Html.DisplayNameFor(model => model.First().Country)
+            </option>
+            <option value="Town">
+                @Html.DisplayNameFor(model => model.First().Town)
+            </option>
+            <option value="Street">
+                @Html.DisplayNameFor(model => model.First().Street)
+            </option>
+            <option value="Street number">
+                @Html.DisplayNameFor(model => model.First().StreetNumber)
+            </option>
+            <option value="Longitude">
+                @Html.DisplayNameFor(model => model.First().Longitude)
+            </option>
+            <option value="Latitude">
+                @Html.DisplayNameFor(model => model.First().Latitude)
+            </option>
+        </select>
+        <input type="text" class="form-control display-inline " id="searchValueLocation" />
+    </div>
+</div>
+<br />
+<div class="tableOuter">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Town)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().StreetNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Latitude)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="code">
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td class="country">
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td class="town">
+                    @Html.DisplayFor(modelItem => item.Town)
+                </td>
+                <td class="street">
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td class="streetNumber">
+                    @Html.DisplayFor(modelItem => item.StreetNumber)
+                </td>
+                <td class="longitude">
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td class="latitude">
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    <button class="location btn btn-default" id="@item.Code">@Common.Choose</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

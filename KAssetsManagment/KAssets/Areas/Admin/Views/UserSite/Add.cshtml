@@ -1,0 +1,48 @@
+﻿@model KAssets.Models.AddUserToSiteViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>@UserSiteTr.SelectUsers</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.SiteId)
+        @if (Model.Users.Count == 0)
+        {
+            <h3>@UserSiteTr.NoUsers</h3>
+            
+            <a href="/Admin/Site/Details/@Model.SiteId">@UserSiteTr.BackToDetails</a>
+        }
+        else
+        {
+            for (int i = 0; i < Model.Users.Count; i++)
+            {
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="/Account/Details/@Model.Users[i].Id">@Model.Users[i].Name</a>
+                    </div>
+                    @Html.CheckBoxFor(x => Model.Users[i].IsSelected)
+                    @Html.HiddenFor(x => Model.Users[i].Id)
+                    @Html.HiddenFor(x => Model.Users[i].Name)
+                </div>
+            }
+            <hr />
+            <div class="form-group">
+                <div class="col-lg-offset-1 col-md-1">
+                    <input type="submit" value="@Common.Add" class="btn btn-default" />
+                </div>
+                <div class="col-md-9">
+                    <a href="/Admin/Site/Details/@Model.SiteId" class="btn btn-default">@Common.Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+}

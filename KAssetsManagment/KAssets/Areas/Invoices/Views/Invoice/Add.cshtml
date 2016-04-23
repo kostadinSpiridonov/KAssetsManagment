@@ -1,0 +1,257 @@
+﻿@model KAssets.Areas.Invoices.Models.AddInvoiceViewModel
+@{
+    ViewBag.Title = "Create invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/styles.css" rel="stylesheet" />
+<style>
+    .font-weight-bold {
+        font-weight: bold;
+    }
+</style>
+<div id="items" class="hidden" title="@InvoiceTr.ChooseItems">
+</div>
+
+<div id="providers" class="hidden" title="@InvoiceTr.ChooseProvider">
+</div>
+
+<div id="providerOrders" class="hidden" title="@InvoiceTr.ChooseOrder">
+</div>
+
+<h2>@InvoiceTr.CreateInvoice</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-12">
+        <h4>@InvoiceTr.InvoiceNumber</h4>
+        <br />
+        <div>
+            <div class="col-md-3">
+                @Html.Label(InvoiceTr.InvoiceNumber, new { @class = "control-label" })
+                <br />
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(x => x.InvoiceNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InvoiceNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <hr />
+        <h4>@InvoiceTr.Dates </h4>
+        <br />
+        <div class="form-group">
+            @Html.Label(@InvoiceTr.DateOfIssue, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                <input disabled value="@DateTime.Now.ToShortDateString()" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <br />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfPayment, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.DateOfPayment, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                @Html.ValidationMessageFor(model => model.DateOfPayment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <h4>@InvoiceTr.RemitTo</h4>
+        <br />
+        <div>
+            <div class="col-md-3">
+                @Html.Label(@InvoiceTr.PleaseSelectPovider, new { @class = "control-label" })
+                <br />
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(x => x.ProviderId, new { @id = "SelectedProvider", @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
+                <input type="button" class="btn btn-default chooseProvider" value="@Common.Choose" />
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3 font-weight-bold">
+                        @Common.Name:
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(x => x.ProviderName, null, new { htmlAttributes = new { @id = "ProviderName", @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-3 font-weight-bold">
+                        @Common.Email:
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(x => x.ProviderEmail, new { htmlAttributes = new { @id = "ProviderEmail", @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-3 font-weight-bold">
+                        @Common.Address:
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(x => x.ProviderAddress, null, new { htmlAttributes = new { @id = "ProviderAddress", @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-3 font-weight-bold">
+                        @InvoiceTr.Bulstat:
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(x => x.ProviderBulstat, null, new { htmlAttributes = new { @id = "ProviderBulstat", @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <br />
+            <br />
+        </div>
+        <div>
+            <div class="form-group">
+                @Html.Label(InvoiceTr.AcountablePerson, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.RecipientMOL, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RecipientMOL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br />
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <h4>@InvoiceTr.BillTo</h4>
+        <br />
+        <div>
+            <div class="form-group">
+                @Html.Label(Common.Organisation, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BillToOrganisation, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.BillToOrganisation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="form-group">
+                @Html.Label(Common.Site, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BillToSite, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.BillToSite, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+            <div class="form-group">
+                @Html.Label(Common.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BillToAddress, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.BillToAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <h4>@InvoiceTr.ProviderOrder</h4>
+        <br />
+        <div>
+            <div class="col-md-3">
+                @Html.Label(InvoiceTr.PleaseSelectPO, new { @class = "control-label" })
+                <br />
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(x => x.PoId, new { @id = "SelectedProviderOrder", @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.PoId, "", new { @class = "text-danger" })
+                <input type="button" class="btn btn-default chooseProviderOrder" value="@Common.Choose" />
+                <input type="button" id="clearPO" value="@Common.Clear" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <h4>@Common.Items</h4>
+        @Html.ValidationMessageFor(model => model.ItemIds, "", new { @class = "text-danger" })
+        <br />
+        <div class="col-md-3">
+            @Html.Label(InvoiceTr.PleaseSelectItems, new { @class = "control-label" })
+            <br />
+            <input type="button" class="btn btn-default chooseItems" value="@Common.Choose" />
+        </div>
+        <div class="col-md-9">
+            <div class="row font-weight-bold">
+                <div class="col-md-3">@AssetTr.Brand</div>
+                <div class="col-md-3">@AssetTr.Model</div>
+                <div class="col-md-3">@Common.Count</div>
+                <div class="col-md-2">@AssetTr.Price</div>
+                <hr />
+            </div>
+            <div id="selectedItems">
+            </div>
+
+            <div id="poItems">
+            </div>
+            <div class="col-md-offset-8">
+                <hr />
+                <h4>
+                    @Common.Total: <span id="total">0.00</span>
+
+                    @Html.DropDownListFor(model => model.SelectedCurrency, Model.Currencies.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Code }),
+                       new { @class = "form-control", @id = "selectCurrency", @style = "width:70px; display:inline" })
+
+
+                </h4>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12">
+        <br />
+        <hr />
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-1">
+            <input type="submit" value="@Common.Create" class="btn btn-default" />
+        </div>
+        <div class="col-md-9">
+            @Html.ActionLink(Common.Cancel, "Index", "Home", new { area=""}, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script src="~/Areas/Invoices/Scripts/Invoice/AddJS.js"></script>
+}

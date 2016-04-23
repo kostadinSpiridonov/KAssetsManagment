@@ -1,0 +1,29 @@
+﻿@model KAssets.Models.BillViewModel
+@using Microsoft.AspNet.Identity
+<div class="row">
+    <div class="col-md-2 bold">
+        @Html.DisplayNameFor(model => model.IBAN)
+    </div>
+    <div class="col-md-10">
+        @Html.DisplayFor(model => model.IBAN)
+    </div>
+    <div class="col-md-2 bold">
+        @Html.DisplayNameFor(model => model.Currency)
+    </div>
+    <div class="col-md-10">
+        @Html.DisplayFor(model => model.Currency)
+    </div>
+    <hr />
+    @if (KAssets.Controllers.StaticFunctions.IsHasRihgt("Low admin", User.Identity.GetUserId()))
+    {
+        <div class="col-md-2">
+            <br />
+            <a href="/Bill/Edit/@Model.OrganisationId" class="btn btn-primary">@Common.Edit</a>
+        </div>
+    }
+</div>
+<style>
+    .bold {
+        font-weight: bold;
+    }
+</style>

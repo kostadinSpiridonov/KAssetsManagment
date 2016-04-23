@@ -1,0 +1,23 @@
+﻿@model KAssets.Areas.AssetsActions.Models.AssetHistoryViewModel
+
+@{
+    ViewBag.Title = "ViewHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Common.History</h2>
+
+<div>
+    <hr />
+    @foreach (var item in Model.Rows)
+    {
+        <div class="row">
+            <div class=" col-md-10">
+                    @item.Content
+            </div>
+            <div class="col-md-2">
+                @item.Date
+            </div>
+        </div>
+    }
+</div>

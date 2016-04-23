@@ -1,0 +1,104 @@
+﻿@model IEnumerable<KAssets.Areas.Items.Models.ItemViewModel>
+
+@{
+    ViewBag.Title = "Items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .display-inline {
+        display: inline;
+    }
+
+    .width-170px {
+        width: 170px;
+    }
+
+    .text-h-center {
+        vertical-align: central;
+    }
+</style>
+
+<h2>@Common.Items</h2>
+@Html.ActionLink(ItemTr.NewItem, "Add", null, new { @class = "btn btn-primary" })
+
+<a href="/Items/Item/GetAllDeleted" class="btn btn-default">@ItemTr.DeletedItems</a>
+<p style="color:red">@TempData["DelError"]</p>
+<br />
+<div class="row">
+    <div class="col-md-1 text-h-center">
+        <h5>@Common.Search</h5>
+    </div>
+    <select class="form-control display-inline width-170px" id="searchBy">
+        <option value="Brand">
+            @Html.DisplayNameFor(model => model.First().Brand)
+        </option>
+        <option value="Id">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </option>
+        <option value="Model">
+            @Html.DisplayNameFor(model => model.First().Model)
+        </option>
+        <option value="Organisation">
+            @Html.DisplayNameFor(model => model.First().OrganisationName)
+        </option>
+    </select>
+    <input type="text" class="form-control display-inline" id="searchValue" />
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganisationName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="id">
+                <a href="/Items/Item/Details/@item.Id">@Html.DisplayFor(modelItem => item.Id)</a>
+            </td>
+            <td class="brand">
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td class="model">
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td class="organisation">
+                @Html.DisplayFor(modelItem => item.OrganisationName)
+            </td>
+            <td>
+                @Html.ActionLink(Common.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink(Common.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+
+    }
+</table>
+@if (Model.Count() == 0)
+{
+    <h4>@ItemTr.NoItems</h4>
+}
+<hr />
+
+
+@section Scripts
+{
+    <script src="~/Areas/Items/Scripts/Item/GetAllJS.js"></script>
+}

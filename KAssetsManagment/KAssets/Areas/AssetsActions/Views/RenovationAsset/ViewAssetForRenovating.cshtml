@@ -1,0 +1,174 @@
+﻿@model KAssets.Areas.AssetsActions.Models.RequestForRenovationDetails
+@{
+    ViewBag.Title = "Asset for ranovating";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@RenovationTr.RequestForRenovation</h2>
+
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h3>@RenovationTr.RequestDetails</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FromName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FromName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfSend)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfSend)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.ProblemMessage)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProblemMessage)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <h3>@ScrappingTr.AssetDetails</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.InventoryNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.InventoryNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Producer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Producer)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Brand)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Brand)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.ItemModel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.ItemModel)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Guarantee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Guarantee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Type)
+            </dt>
+
+            <dd>
+                @Enum.GetName(typeof(KAssets.Models.TypesOfAsset), Model.Asset.Type)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Price) @(" "+Model.Asset.Currency)
+            </dd>
+            <dt>
+                @Html.DisplayName(Common.Site)
+            </dt>
+            <dd>
+                @Model.Asset.SiteName
+            </dd>
+            <dt>
+                @Html.DisplayName(Common.Location)
+            </dt>
+            <dd>
+                @if (Model.Asset.Location != null)
+                {
+                    <div>
+                        @if (Model.Asset.Location.Country != null)
+                        {
+                            @Model.Asset.Location.Country
+                        }
+                        @if (Model.Asset.Location.Town != null)
+                        {
+                            @Model.Asset.Location.Town
+                        }
+                        @if (Model.Asset.Location.Street != null)
+                        {
+                            @Model.Asset.Location.Street
+                        }
+                        @((Model.Asset.Location.StreetNumber != null && Model.Asset.Location.StreetNumber.Value != 0 ? Model.Asset.Location.StreetNumber.Value.ToString() : ""))
+                        @Model.Asset.Location.Latitude @Model.Asset.Location.Longitude
+                    </div>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        @if (Model.IsRecieve)
+        {
+            using (Html.BeginForm("Renovate", "RenovationAsset"))
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" name="id" value="@Model.Id" />
+
+                <div class="form-group">
+                    <div class=" col-md-4 margin-r-5">
+                        <input type="submit" value="@RenovationTr.Renovate" class="btn btn-primary float-right " />
+                    </div>
+                    <div class="inline-block">
+                        <a href="/AssetsActions/RenovationAsset/AssetIsNotRenovate/@Model.Id" class="btn btn-danger">@Common.Decline</a>
+                    </div>
+                    <div class="inline-block margin-l-15">
+                        <a href="/AssetsActions/RenovationAsset/GetAssetsForRenovating" class="btn btn-default">@Common.Cancel</a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("ReceiveIssue", "RenovationAsset"))
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" name="id" value="@Model.Id" />
+
+                <div class="form-group">
+                    <div class=" col-md-2 col-md-offset-3">
+                        <input type="submit" value="@Common.Receive" class="btn btn-primary" />
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/AssetsActions/RenovationAsset/GetAssetsForRenovating" class="btn btn-default">@Common.Cancel</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

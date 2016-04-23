@@ -1,0 +1,214 @@
+﻿@model KAssets.Areas.AssetsActions.Models.RequestForRelocationDetails
+@{
+    ViewBag.Title = "Request for receiving";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@RelocationTr.RequestForReceivingAssetWithoutUser</h2>
+
+
+
+
+<style>
+    dd {
+        height: 1.5em; /* or whatever - but use ems :) */
+    }
+</style>
+
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h3>@RenovationTr.RequestDetails</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FromName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FromName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfSend)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfSend)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayName(RelocationTr.FromSite)
+            </dt>
+
+            <dd style="color:red">
+                @Html.DisplayFor(model => model.Asset.SiteName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ToSiteName)
+            </dt>
+
+            <dd style="color:blue">
+                @Html.DisplayFor(model => model.ToSiteName)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayName(RelocationTr.FromUser)
+            </dt>
+
+            <dd style="color:red">
+                @Html.DisplayFor(model => model.Asset.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayName(RelocationTr.ToUser)
+            </dt>
+
+            <dd style="color:blue">
+                @Html.DisplayFor(model => model.ToUser)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayName(RelocationTr.FromLocation)
+            </dt>
+
+            <dd style="color:red">
+                @if (Model.Asset.Location != null)
+                {
+                    if (Model.Asset.Location.Country != null)
+                    {
+                        @(Model.Asset.Location.Country + " ")
+                    }
+                    if (Model.Asset.Location.Town != null)
+                    {
+                        @(Model.Asset.Location.Town + " ")
+                    }
+                    if (Model.Asset.Location.Street != null)
+                    {
+                        @(Model.Asset.Location.Street + " ")
+                    }
+                    @((Model.Asset.Location.StreetNumber != null && Model.Asset.Location.StreetNumber.Value != 0 ? Model.Asset.Location.StreetNumber.Value.ToString() + " " : ""))
+                    @(Model.Asset.Location.Latitude + " ") @Model.Asset.Location.Longitude
+                }
+            </dd>
+            <dt>
+                @Html.DisplayName(RelocationTr.ToLocation)
+            </dt>
+
+            <dd style="color:blue">
+                <div>
+                    @Model.ToLocation
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <h3>@AssetTr.AssetDetails</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.InventoryNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.InventoryNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Producer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Producer)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Brand)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Brand)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.ItemModel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.ItemModel)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Guarantee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Guarantee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Type)
+            </dt>
+
+            <dd>
+                @Enum.GetName(typeof(KAssets.Models.TypesOfAsset), Model.Asset.Type)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asset.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asset.Price) @(" "+ Model.Asset.Currency)
+            </dd>
+            <dt>
+                @Html.DisplayName(RelocationTr.ToSite)
+            </dt>
+            <dd>
+                @Model.Asset.SiteName
+            </dd>
+            <dt>
+                @Html.DisplayName(Common.Location)
+            </dt>
+            <dd>
+                @if (Model.Asset.Location != null)
+                {
+                    <div>
+                        @if (Model.Asset.Location.Country != null)
+                        {
+                            @Model.Asset.Location.Country
+                        }
+                        @if (Model.Asset.Location.Town != null)
+                        {
+                            @Model.Asset.Location.Town
+                        }
+                        @if (Model.Asset.Location.Street != null)
+                        {
+                            @Model.Asset.Location.Street
+                        }
+                        @((Model.Asset.Location.StreetNumber != null && Model.Asset.Location.StreetNumber.Value != 0 ? Model.Asset.Location.StreetNumber.Value.ToString() : ""))
+                        @Model.Asset.Location.Latitude @Model.Asset.Location.Longitude
+                    </div>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        @using (Html.BeginForm("ReceiveAssetWithOutUsers", "RelocationAsset"))
+        {
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="form-group">
+                <div class=" col-md-3 inline-block margin-r-5">
+                    <input type="submit" value="@RelocationTr.ReceiveAsset" class="btn btn-primary float-right" />
+                </div>
+                <div class="inline-block">
+                    <a href="/AssetsActions/RelocationAsset/RequestsForReceivingWithOutUser/" class="btn btn-default">@Common.Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
